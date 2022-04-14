@@ -1,5 +1,6 @@
 const AUTH_HOST = 'https://app-keycloak-prod.herokuapp.com';
 const HVZ_PROD_CLIENT = "hvz-prod";
+const HVZ_LOCAL_CLIENT = "hvz-local";
 const ADMIN_TOKEN_ENDPOINT = 'https://app-keycloak-prod.herokuapp.com/auth/realms/master/protocol/openid-connect/token'
 const LOGIN_ENDPOINT = 'https://app-keycloak-prod.herokuapp.com/auth/realms/hvz/protocol/openid-connect/token'
 const USER_REGISTER_ENDPOINT = 'https://app-keycloak-prod.herokuapp.com/auth/admin/realms/hvz/users'
