@@ -3,7 +3,7 @@ import Navbar from "./Components/Navbar/Navbar"
 import {getAdminAccessToken, login, refreshUserAccessToken, registerNewUser} from "./services/authService"
 import {useContext} from "react";
 import {UserContext} from "./store/UserContext";
-import {createGame} from "./services/gameService";
+import {createGame, getAllGames} from "./services/gameService";
 
 function App() {
     const [user, setUser] = useContext(UserContext);
@@ -12,7 +12,7 @@ function App() {
     async function loginFeat() {
         userData = await login('petar', "123321");
         setUser({
-            username:'petar',
+            username: 'petar',
             access_token: userData.access_token,
             refresh_token: userData.refresh_token
         });
@@ -22,12 +22,12 @@ function App() {
         await registerNewUser("testuser100", "testln100", "testmail30@mail.de", "testuser100", "password")
     }
 
-    async function refreshToken(){
+    async function refreshToken() {
         let refreshedUserData = await refreshUserAccessToken(user.refresh_token);
         let username = user.username;
 
         setUser({
-            username:username,
+            username: username,
             access_token: refreshedUserData.access_token,
             refresh_token: refreshedUserData.refresh_token
         });
@@ -35,15 +35,19 @@ function App() {
         console.log(refreshedUserData);
     }
 
-    function printUserData(){
+    function printUserData() {
         console.log(user);
     }
 
+    async function createGameTest() {
+        let game = await createGame(user.access_token, `testGameFromReact`);
 
-    async function createGameTest(){
-      let game = await createGame(user.access_token, `testGameFromReact`);
+        console.log(game);
+    }
 
-      console.log(game);
+    async function getGames() {
+        let games = await getAllGames();
+        console.log(games);
     }
 
     return (
@@ -57,6 +61,8 @@ function App() {
 
             <hr/>
             <button onClick={createGameTest}>create game</button>
+            <hr/>
+            <button onClick={getGames}>get all games</button>
         </div>
     );
 }
