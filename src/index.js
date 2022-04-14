@@ -4,7 +4,6 @@ import App from './App';
 import AppContainer from './Components/hoc/AppContainer.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css';
-import reportWebVitals from './reportWebVitals';
 import UserProvider from "./store/UserContext";
 
 

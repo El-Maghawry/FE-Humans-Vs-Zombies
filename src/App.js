@@ -1,4 +1,5 @@
 import './App.css';
+import Navbar from "./Components/Navbar/Navbar"
 import {getAdminAccessToken, login, refreshUserAccessToken, registerNewUser} from "./services/authService"
 import {useContext} from "react";
 import {UserContext} from "./store/UserContext";
@@ -47,11 +48,13 @@ function App() {
 
     return (
         <div className="App">
-            <button onClick={loginFeat}> login</button>
-            <button onClick={getAdminAccessToken}> token</button>
-            <button onClick={register}>register</button>
-            <button onClick={refreshToken}>refresh token</button>
-            <button onClick={printUserData}> print user data</button>
+            <Navbar/>
+                <button onClick={loginFeat}> login</button>
+                <button onClick={getAdminAccessToken}> token</button>
+                <button onClick={register}>register</button>
+                <button onClick={refreshToken}>refresh token</button>
+                <button onClick={printUserData}> print user data</button>
+
             <hr/>
             <button onClick={createGameTest}>create game</button>
         </div>
