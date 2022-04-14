@@ -1,15 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
-import registerUser from "./services/user.service"
-import {getAdminToken} from "./services/user.service";
+import {getAdminAccessToken} from "./services/user"
+
 function App() {
 
-  //registerUser("test1","test1","test1","test1@test1.de","test1",)
-  getAdminToken()
 
   return (
     <div className="App">
+      <button onClick={getAdminAccessToken}> token </button>
       <header className="App-header">
+
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
