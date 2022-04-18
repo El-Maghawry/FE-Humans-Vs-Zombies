@@ -1,4 +1,5 @@
 import './App.css';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {getAdminAccessToken, login, refreshUserAccessToken, registerNewUser} from "./services/authService"
 import {useContext} from "react";
@@ -10,6 +11,7 @@ import NotFoundView from './Components/views/NotFoundView'
 import LoginView from  './Components/views/LoginView'
 import RegisterView from './Components/views/RegisterView'
 import GamesListView from './Components/views/GamesListView'
+
 
 function App() {
     const [user, setUser] = useContext(UserContext);
@@ -46,7 +48,7 @@ function App() {
     }
 
     async function createGameTest() {
-        let game = await createGame(user.access_token, `testGameFromReact`);
+        let game = await createGame( `testGameFromReact`);
 
         console.log(game);
     }
