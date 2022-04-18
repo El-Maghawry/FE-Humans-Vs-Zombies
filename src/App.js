@@ -1,10 +1,10 @@
 import './App.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import {getAdminAccessToken, login, refreshUserAccessToken, registerNewUser} from "./services/authService"
+import {getAdminAccessToken, login, refreshUserAccessToken, registerNewUser} from "./services/keycloak/authService"
 import {useContext} from "react";
 import {UserContext} from "./store/UserContext"
-import {createGame, getAllGames} from "./services/gameService"
+import {createGame, getAllGames} from "./services/rest-api/gameService"
 
 import Navbar from "./Components/Navbar/Navbar"
 import NotFoundView from './Components/views/NotFoundView'
