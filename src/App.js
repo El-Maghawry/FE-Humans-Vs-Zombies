@@ -1,9 +1,15 @@
 import './App.css';
-import Navbar from "./Components/Navbar/Navbar"
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {getAdminAccessToken, login, refreshUserAccessToken, registerNewUser} from "./services/authService"
 import {useContext} from "react";
-import {UserContext} from "./store/UserContext";
-import {createGame, getAllGames} from "./services/gameService";
+import {UserContext} from "./store/UserContext"
+import {createGame, getAllGames} from "./services/gameService"
+
+import Navbar from "./Components/Navbar/Navbar"
+import NotFoundView from './Components/views/NotFoundView'
+import LoginView from  './Components/views/LoginView'
+import RegisterView from './Components/views/RegisterView'
+import GamesListView from './Components/views/GamesListView'
 
 function App() {
     const [user, setUser] = useContext(UserContext);
@@ -52,19 +58,27 @@ function App() {
 
     return (
         <div className="App">
-            <Navbar/>
+            <BrowserRouter>
+                <Navbar/>
+            
+                <Routes>
+                    <Route path="/" element={<GamesListView/>}/>
+                    <Route path="/login" element={<LoginView/>}/>
+                    <Route path="/register" element={<RegisterView/>}/>
+                    <Route path="*" element={<NotFoundView/>}/>
+                </Routes>
 
+                <button onClick={loginFeat}> login</button>
+                <button onClick={getAdminAccessToken}> token</button>
+                <button onClick={register}>register</button>
+                <button onClick={refreshToken}>refresh token</button>
+                <button onClick={printUserData}> print user data</button>
 
-            <button onClick={loginFeat}> login</button>
-            <button onClick={getAdminAccessToken}> token</button>
-            <button onClick={register}>register</button>
-            <button onClick={refreshToken}>refresh token</button>
-            <button onClick={printUserData}> print user data</button>
-
-            <hr/>
-            <button onClick={createGameTest}>create game</button>
-            <hr/>
-            <button onClick={getGames}>get all games</button>
+                <hr/>
+                <button onClick={createGameTest}>create game</button>
+                <hr/>
+                <button onClick={getGames}>get all games</button>
+            </BrowserRouter>
         </div>
     );
 }
