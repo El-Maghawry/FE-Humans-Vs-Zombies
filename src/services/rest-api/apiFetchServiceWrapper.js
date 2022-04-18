@@ -17,7 +17,7 @@ async function request(url, options) {
                 hasAuthErr = true;
                 const access_token = getAccessToken();
 
-                options.headers['access_token'] = `Bearer ${access_token}`;
+                options.headers['Authorization'] = `Bearer ${access_token}`;
                 response = await fetch(API_HOST + url, options);
 
                 if (response.ok !== true) {
@@ -66,7 +66,7 @@ async function get(url) {
 }
 
 async function post(url, data) {
-    return request(url, createOptions('post', data | undefined, getAccessToken()));
+    return request(url, createOptions('post', data, getAccessToken()));
 }
 
 async function put(url, data) {
