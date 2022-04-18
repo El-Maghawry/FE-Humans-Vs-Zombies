@@ -53,11 +53,13 @@ function App() {
     return (
         <div className="App">
             <Navbar/>
-                <button onClick={loginFeat}> login</button>
-                <button onClick={getAdminAccessToken}> token</button>
-                <button onClick={register}>register</button>
-                <button onClick={refreshToken}>refresh token</button>
-                <button onClick={printUserData}> print user data</button>
+
+
+            <button onClick={loginFeat}> login</button>
+            <button onClick={getAdminAccessToken}> token</button>
+            <button onClick={register}>register</button>
+            <button onClick={refreshToken}>refresh token</button>
+            <button onClick={printUserData}> print user data</button>
 
             <hr/>
             <button onClick={createGameTest}>create game</button>
