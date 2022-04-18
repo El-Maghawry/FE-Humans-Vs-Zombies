@@ -9,8 +9,10 @@ import {createGame, getAllGames} from "./services/rest-api/gameService"
 import Navbar from "./Components/Navbar/Navbar"
 import NotFoundView from './Components/views/NotFoundView'
 import LoginView from  './Components/views/LoginView'
+import GameView from './Components/views/GameView'
+import PlayerView from './Components/views/PlayerView'
 import RegisterView from './Components/views/RegisterView'
-import GamesListView from './Components/views/GamesListView'
+import GameListView from './Components/views/GameListView'
 
 
 function App() {
@@ -64,8 +66,10 @@ function App() {
                 <Navbar/>
             
                 <Routes>
-                    <Route path="/" element={<GamesListView/>}/>
+                    <Route path="/" element={<GameListView/>}/>
                     <Route path="/login" element={<LoginView/>}/>
+                    <Route path="/game" element={<GameView/>}/>
+                    <Route path="/game/:id/player" element={<PlayerView/>}/>
                     <Route path="/register" element={<RegisterView/>}/>
                     <Route path="*" element={<NotFoundView/>}/>
                 </Routes>

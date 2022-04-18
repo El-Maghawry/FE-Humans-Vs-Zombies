@@ -8,8 +8,8 @@ const Navbar = () => {
     // }
 
     return (
-        <nav className="navbar mt-3 mb-5">
-            <h1> 🥷🏿 Humans Vs. Zombies 🧟‍♂️ </h1>
+        <nav className="navbar mt-3 mb-5 bg-warning rounded">
+            <h1 className='px-5'> 🥷🏿 Humans Vs. Zombies 🧟‍♂️ </h1>
             <div className="links p-3">
                 <Link to="/Login">Login</Link>
                 <Link to="/Register">Register</Link>

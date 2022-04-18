@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { getAllGames } from '../../services/gameService'
 
 const LoginView = () => {
    
