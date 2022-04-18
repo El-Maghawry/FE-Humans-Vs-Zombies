@@ -69,6 +69,7 @@ function App() {
                     <Route path="/register" element={<RegisterView/>}/>
                     <Route path="*" element={<NotFoundView/>}/>
                 </Routes>
+                <br/><br/><br/><br/><br/>
 
                 <button onClick={loginFeat}> login</button>
                 <button onClick={getAdminAccessToken}> token</button>
