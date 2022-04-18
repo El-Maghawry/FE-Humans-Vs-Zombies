@@ -4,7 +4,7 @@ async function createUser() {
     return await post('/user');
 }
 
-async function getAllUser() {
+async function getAllUsers() {
     return await get('/user');
 }
 
@@ -12,4 +12,4 @@ async function updateUser(userId, userData) {
     return await put(`/user/${userId}`, userData);
 }
 
-export {createUser, getAllUser, updateUser};
+export {createUser, getAllUsers, updateUser};

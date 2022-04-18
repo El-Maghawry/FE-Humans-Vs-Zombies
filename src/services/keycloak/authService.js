@@ -10,7 +10,7 @@ const ADMIN_PASSWORD = 'admin';
 const GRANT_TYPE = 'password';
 const CLIENT_ID = 'admin-cli';
 
-export async function getAdminAccessToken() {
+ async function getAdminAccessToken() {
     const adminBody = {
         'username': ADMIN_USERNAME,
         'password': ADMIN_PASSWORD,
@@ -41,7 +41,7 @@ export async function getAdminAccessToken() {
     }
 }
 
-export async function registerNewUser(firstname, lastname, email, username, password) {
+ async function registerNewUser(firstname, lastname, email, username, password) {
     /*
     first we need to get a valid admin access token by clicking on the Get Admin Access Token button,
     then simply we are making the following request
@@ -85,7 +85,7 @@ export async function registerNewUser(firstname, lastname, email, username, pass
     }
 }
 
-export async function login(username, password) {
+ async function login(username, password) {
     const userLoginData = {
         'client_id': HVZ_PROD_CLIENT,
         'username': username,
@@ -124,7 +124,7 @@ export async function login(username, password) {
 }
 
 
-export async function refreshUserAccessToken(refresh_token) {
+ async function refreshUserAccessToken(refresh_token) {
     const userLoginData = {
         'client_id': HVZ_PROD_CLIENT,
         'grant_type': 'refresh_token',
@@ -166,10 +166,19 @@ export async function refreshUserAccessToken(refresh_token) {
     }
 }
 
-export function logout() {
+ function logout() {
     localStorage.clear();
     return true;
 }
+
+export{
+    getAdminAccessToken,
+    registerNewUser,
+    login,
+    refreshUserAccessToken,
+    logout
+}
+
 
 /*
 Method: POST
