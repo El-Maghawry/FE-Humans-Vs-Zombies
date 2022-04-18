@@ -6,7 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css';
 import UserProvider from "./store/UserContext";
 
-
 createRoot.render(
   <React.StrictMode>
       <UserProvider>
