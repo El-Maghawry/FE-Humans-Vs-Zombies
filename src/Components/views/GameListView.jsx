@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import GamesList from "../../Components/GamesList/GamesList";
+import GamesList from "../GamesList/GamesList";
 
 const GameListView = () => {
   const [games, setGames] = useState([]);
@@ -20,7 +20,7 @@ const GameListView = () => {
       {
         id: "987412365",
         name: "Game 2",
-        gameState: "PROGRESS",
+        gameState: "IN PROGRESS",
         players: [],
       },
       {
@@ -37,12 +37,9 @@ const GameListView = () => {
 
       <table className="table table-bordered table-striped">
         <thead>
-          <th>All Games</th>
-          <th>
-            {/* <NavLink to="/add-employee" className="btn btn-info mb-2">
-              Add Employee
-            </NavLink> */}
-          </th>
+          <th>Games</th>
+          <th>State</th>
+          <th>Players</th>
         </thead>
         <tbody>
           {
