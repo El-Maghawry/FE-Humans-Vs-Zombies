@@ -1,14 +1,14 @@
 const AUTH_HOST = 'https://app-keycloak-prod.herokuapp.com';
 const HVZ_PROD_CLIENT = "hvz-prod";
 const HVZ_LOCAL_CLIENT = "hvz-local";
-const ADMIN_TOKEN_ENDPOINT = 'https://app-keycloak-prod.herokuapp.com/auth/realms/master/protocol/openid-connect/token'
-const LOGIN_ENDPOINT = 'https://app-keycloak-prod.herokuapp.com/auth/realms/hvz/protocol/openid-connect/token'
-const USER_REGISTER_ENDPOINT = 'https://app-keycloak-prod.herokuapp.com/auth/admin/realms/hvz/users'
-const REFRESH_TOKEN_ENDPOINT = 'https://app-keycloak-prod.herokuapp.com/auth/realms/hvz/protocol/openid-connect/token'
-const ADMIN_USERNAME = 'admin'
-const ADMIN_PASSWORD = 'admin'
-const GRANT_TYPE = 'password'
-const CLIENT_ID = 'admin-cli'
+const ADMIN_TOKEN_ENDPOINT = 'https://app-keycloak-prod.herokuapp.com/auth/realms/master/protocol/openid-connect/token';
+const LOGIN_ENDPOINT = 'https://app-keycloak-prod.herokuapp.com/auth/realms/hvz/protocol/openid-connect/token';
+const USER_REGISTER_ENDPOINT = 'https://app-keycloak-prod.herokuapp.com/auth/admin/realms/hvz/users';
+const REFRESH_TOKEN_ENDPOINT = 'https://app-keycloak-prod.herokuapp.com/auth/realms/hvz/protocol/openid-connect/token';
+const ADMIN_USERNAME = 'admin';
+const ADMIN_PASSWORD = 'admin';
+const GRANT_TYPE = 'password';
+const CLIENT_ID = 'admin-cli';
 
 export async function getAdminAccessToken() {
     const adminBody = {
@@ -16,7 +16,7 @@ export async function getAdminAccessToken() {
         'password': ADMIN_PASSWORD,
         'grant_type': GRANT_TYPE,
         'client_id': CLIENT_ID
-    }
+    };
 
     try {
         const response = await fetch(ADMIN_TOKEN_ENDPOINT, {
@@ -60,7 +60,7 @@ export async function registerNewUser(firstname, lastname, email, username, pass
             "value": password,
             "temporary": false
         }]
-    }
+    };
 
     try {
         const response = await fetch(USER_REGISTER_ENDPOINT, {
@@ -114,6 +114,8 @@ export async function login(username, password) {
 
         responseUserData = await response.json();
 
+        responseUserData.username = username;
+        localStorage.setItem('<USER>', JSON.stringify(responseUserData));
         return responseUserData;
 
     } catch (e) {
@@ -149,11 +151,24 @@ export async function refreshUserAccessToken(refresh_token) {
 
         responseUserData = await response.json();
 
+        let oldUserData = JSON.parse(localStorage.getItem('<USER>'));
+
+        if (oldUserData) {
+            responseUserData.username = oldUserData.username;
+            localStorage.removeItem('<USER>');
+            localStorage.setItem('<USER>', JSON.stringify(responseUserData));
+        }
+
         return responseUserData;
 
     } catch (e) {
         console.log(e.stackTrace);
     }
+}
+
+export function logout() {
+    localStorage.clear();
+    return true;
 }
 
 /*

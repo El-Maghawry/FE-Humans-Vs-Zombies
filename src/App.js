@@ -1,9 +1,9 @@
 import './App.css';
 import Navbar from "./Components/Navbar/Navbar"
-import {getAdminAccessToken, login, refreshUserAccessToken, registerNewUser} from "./services/authService"
+import {getAdminAccessToken, login, refreshUserAccessToken, registerNewUser} from "./services/keycloak/authService"
 import {useContext} from "react";
 import {UserContext} from "./store/UserContext";
-import {createGame, getAllGames} from "./services/gameService";
+import {createGame, getAllGames} from "./services/rest-api/gameService";
 
 function App() {
     const [user, setUser] = useContext(UserContext);
@@ -40,7 +40,7 @@ function App() {
     }
 
     async function createGameTest() {
-        let game = await createGame(user.access_token, `testGameFromReact`);
+        let game = await createGame( `testGameFromReact`);
 
         console.log(game);
     }
