@@ -6,17 +6,27 @@ import {useContext} from "react";
 import {UserContext} from "./store/UserContext";
 import {createGame, deleteGame, getAllGames, getGameById, updateGame} from "./services/rest-api/gameService";
 
-import Navbar from "./Components/Navbar/Navbar"
-import NotFoundView from './Components/views/NotFoundView'
-import LoginView from  './Components/views/LoginView'
-import GameView from './Components/views/GameView'
-import PlayerView from './Components/views/PlayerView'
-import RegisterView from './Components/views/RegisterView'
-import GameListView from './Components/views/GameListView'
+import Navbar from "./Components/Navbar/Navbar";
+import NotFoundView from './Components/views/NotFoundView';
+import LoginView from './Components/views/LoginView';
+import GameView from './Components/views/GameView';
+import PlayerView from './Components/views/PlayerView';
+import RegisterView from './Components/views/RegisterView';
+import GameListView from './Components/views/GameListView';
 import {createUser, getAllUsers, updateUser} from "./services/rest-api/userService";
 import {GAME_STATE_TYPES} from "./services/rest-api/gameStateTypes";
-import {createPlayer} from "./services/rest-api/playerService";
-
+import {
+    createPlayer,
+    getAllPlayersInGame,
+    getPlayerInGame,
+    updatePlayerInGame
+} from "./services/rest-api/playerService";
+import {
+    createKillInGame,
+    deleteKillInGame,
+    getAllKillsInGame,
+    getKillInGame
+} from "./services/rest-api/killService";
 
 
 function App() {
@@ -27,7 +37,7 @@ function App() {
         userData = await login('petar', "123321");
 
         setUser({
-            username: 'petar',
+            username: 'testuser',
             access_token: userData.access_token,
             refresh_token: userData.refresh_token
         });
@@ -85,27 +95,69 @@ function App() {
         console.log(data);
     }
 
-    async function testUpdateGame(){
-        let data = await updateGame(1,{gameState: GAME_STATE_TYPES.in_progress});
+    async function testUpdateGame() {
+        let data = await updateGame(1, {gameState: GAME_STATE_TYPES.in_progress});
         console.log(data);
     }
 
-    async function getGameByIdTest(){
-        const data = await getGameById(1);
+    async function getGameByIdTest() {
+        const data = await getGameById(3);
         console.log(data);
     }
 
-    async function deleteGameTest(){
-       console.log( await deleteGame(1));
+    async function deleteGameTest() {
+        console.log(await deleteGame(1));
     }
 
-    async function registerPlayerForGameTest(){
-        const data = await createPlayer(1,{
-            "human": true,
-            "zombie": false
+    async function registerPlayerForGameTest() {
+        const data = await createPlayer(1, {
+            "human": false,
+            "zombie": true
         });
 
-        console.log(data)
+        console.log(data);
+    }
+
+    async function getPlayersInGame() {
+        const data = await getAllPlayersInGame(1);
+        console.log(data);
+    }
+
+    async function getPlayer() {
+        const data = await getPlayerInGame(3, 5);
+        console.log(data);
+    }
+
+    async function updatePlayerTest() {
+        const data = await updatePlayerInGame(3, 4, {
+            "zombie": false,
+            "human": true
+        });
+    }
+
+    async function createKillTest() {
+        const data = await createKillInGame(1,
+            {
+                "victimBiteCode": "[49, 48, 57, 52, 100, 98, 53, 56, 45, 102, 49, 49, 98, 45, 52, 57, 48, 57, 45, 56, 48, 52, 54, 45, 56, 53, 48, 99, 50, 48, 51, 56, 56, 102, 98, 53]",
+                "killer_id": 3
+            });
+
+        console.log(data);
+    }
+
+    async function getAllKillsInGameTest() {
+        const data = await getAllKillsInGame(3);
+        console.log(data);
+    }
+
+    async function getKillInGameTest() {
+        const data = await getKillInGame(3, 1);
+        console.log(data);
+    }
+
+    async function delKill() {
+        const data = await deleteKillInGame(1);
+        console.log(data);
     }
 
     return (
@@ -147,6 +199,23 @@ function App() {
                 <button onClick={registerPlayerForGameTest}>registerPlayerForGameTest</button>
                 <hr/>
                 <button onClick={deleteGameTest}>deleteGameTest</button>
+                <hr/>
+                <button onClick={getPlayersInGame}>getAllPlayersInGame</button>
+                <hr/>
+                <button onClick={getPlayer}>getPlayerInGame</button>
+                <hr/>
+                <button onClick={updatePlayerTest}>update player</button>
+
+
+                <hr/>
+                <button onClick={createKillTest}>createKillTest</button>
+                <hr/>
+                <button onClick={getAllKillsInGameTest}>getAllKillsInGameTest</button>
+                <hr/>
+                <button onClick={getKillInGameTest}>getKillInGameTest</button>
+                <hr/>
+                <button onClick={delKill}>delKill</button>
+
             </BrowserRouter>
         </div>
     );
