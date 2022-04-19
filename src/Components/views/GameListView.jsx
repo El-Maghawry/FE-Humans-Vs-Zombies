@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import GamesList from "../GamesList/GamesList";
+import GameListItem from "../Game/GameListItem";
 
 const GameListView = () => {
   const [games, setGames] = useState([]);
@@ -9,7 +9,7 @@ const GameListView = () => {
   }, []);
 
   const getAllGames = () => {
-    // Backend request
+    // GET: /api/game
     return setGames([
       {
         id: "123456789",
@@ -29,6 +29,12 @@ const GameListView = () => {
         gameState: "REGISTRATION",
         players: [],
       },
+      {
+        id: "000102365",
+        name: "Game 4",
+        gameState: "REGISTRATION",
+        players: [],
+      }
     ]);
   };
 
@@ -43,7 +49,7 @@ const GameListView = () => {
         </thead>
         <tbody>
           {
-            games.map((game) => (<GamesList game={game} key={game.id}/>))
+            games.map((game) => (<GameListItem game={game} key={game.id}/>))
           }
         </tbody>
       </table>

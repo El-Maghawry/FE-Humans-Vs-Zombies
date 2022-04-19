@@ -7,8 +7,7 @@ const LoginView = () => {
 
   const loginSubmit = (e) => {
     e.preventDefault();
-    console.log(username);
-    console.log(password);
+    // POST: /api/user
   }
 
   return (
