@@ -36,7 +36,7 @@ function App() {
     let userData;
 
     async function loginFeat() {
-        userData = await login('petar', "123321");
+        userData = await login('philipp', "123321");
 
         setUser({
             username: 'petar',
@@ -103,7 +103,7 @@ function App() {
     }
 
     async function getGameByIdTest(){
-        const data = await getGameById(1);
+        const data = await getGameById(2);
         console.log(data);
     }
 
@@ -112,7 +112,7 @@ function App() {
     }
 
     async function registerPlayerForGameTest(){
-        const data = await createPlayer(1,{
+        const data = await createPlayer(2,{
             "human": true,
             "zombie": false
         });
@@ -121,7 +121,7 @@ function App() {
     }
 
     async function getPlayersInGame() {
-        const data = await getAllPlayersInGame(1);
+        const data = await getAllPlayersInGame(2);
         console.log(data);
     }
 

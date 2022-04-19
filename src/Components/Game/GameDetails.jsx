@@ -1,38 +1,39 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react';
 
-const GameDetails = ({ game }) => {
+const GameDetails = (props) => {
 
-  const editGame = () => {
-  // PUT: /api/game/{gameId}
-    let updatedGame = {...game};
-    console.log(updatedGame);
-  } 
+    // const editGame = () => {
+    // // PUT: /api/game/{gameId}
+    //   let updatedGame = {...game};
+    //   console.log(updatedGame);
+    // }
 
-  const renderPlayers = () => {
+    const renderPlayers = () => {
+        return props.game.players.map(player =>
+            (
+                <div key={player.id}>
+                    <p>Player: {player.userId}</p>
+                    <p>Player: {player.isHuman}</p>
+                    <p>Player: {player.isZombie}</p>
+                </div>
+            )
+        );
+    };
 
-    return game.players.map(player => 
-      (
-        <div key={player.id}>
-          <p>Player: {player.id}</p>
-        </div>
-      )   
-    );
-  }
-  
-  return (
-    <div>
-      <h2>{game.name}</h2>
-      <p>Game state: {game.gameState}</p>
-      <br/>
-      <div>{ renderPlayers() }</div>
-      <br/>
-      <div>
+    return (
+        <div>
+            <h2>{}</h2>
+            <p>Game state: {}</p>
+            <br/>
+            <div>{renderPlayers()}</div>
+            <br/>
+            <div>
         <span>
-          <button className='btn btn-info' onClick={editGame}>Edit</button>
+          <button className="btn btn-info">Edit</button>
         </span>
-      </div>
-    </div>
-  )
-}
+            </div>
+        </div>
+    );
+};
 
-export default GameDetails
+export default GameDetails;
