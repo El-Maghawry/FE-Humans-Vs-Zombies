@@ -1,14 +1,17 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
-const GamesList = ({ game }) => {
+const GameListItem = ({ game }) => {
+
+  const navigate = useNavigate();
 
   const joinGame = (gameId) => {
-    // Backend request: it creates Player in the Game
+    // POST: /api/game/{gameId}/player
+    navigate(`/game/${gameId}/player`);
   }
 
   const displayGameDetails = (gameId) => {
-    console.log(gameId);
+    navigate(`/game/${gameId}`);
   }
 
   return (
@@ -25,4 +28,4 @@ const GamesList = ({ game }) => {
   )
 }
 
-export default GamesList
+export default GameListItem
