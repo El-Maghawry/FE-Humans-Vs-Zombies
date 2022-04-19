@@ -5,18 +5,18 @@ import {getAdminAccessToken, login, refreshUserAccessToken, registerNewUser} fro
 import {useContext} from "react";
 import {UserContext} from "./store/UserContext";
 import {createGame, deleteGame, getAllGames, getGameById, updateGame} from "./services/rest-api/gameService";
-
-import Navbar from "./Components/Navbar/Navbar"
-import NotFoundView from './Components/views/NotFoundView'
-import LoginView from  './Components/views/LoginView'
-import GameView from './Components/views/GameView'
-import PlayerView from './Components/views/PlayerView'
-import RegisterView from './Components/views/RegisterView'
-import GameListView from './Components/views/GameListView'
 import {createUser, getAllUsers, updateUser} from "./services/rest-api/userService";
 import {GAME_STATE_TYPES} from "./services/rest-api/gameStateTypes";
 import {createPlayer} from "./services/rest-api/playerService";
 
+import Navbar from "./Components/Navbar/Navbar"
+import NotFoundView from './Components/views/NotFoundView'
+import LoginView from  './Components/views/LoginView'
+import ConfigSession from './Components/views/ConfigSession';
+import PlayerView from './Components/views/PlayerView'
+import RegisterView from './Components/views/RegisterView'
+import GameListView from './Components/views/GameListView'
+import GameView from './Components/views/GameView'
 
 
 function App() {
@@ -116,12 +116,16 @@ function App() {
                 <Routes>
                     <Route path="/" element={<GameListView/>}/>
                     <Route path="/login" element={<LoginView/>}/>
+
+                    <Route path="/configsession" element={<ConfigSession/>}/>
+
                     <Route path="/game/:id" element={<GameView/>}/>
+
                     <Route path="/game/:id/player" element={<PlayerView/>}/>
                     <Route path="/register" element={<RegisterView/>}/>
                     <Route path="*" element={<NotFoundView/>}/>
                 </Routes>
-                <br/><br/><br/><br/><br/>
+                <br/><br/><br/><br/><br/><hr/>
 
                 <button onClick={loginFeat}> login</button>
                 <button onClick={getAdminAccessToken}> token</button>
