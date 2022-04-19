@@ -18,8 +18,6 @@ import RegisterView from './Components/views/RegisterView'
 import GameListView from './Components/views/GameListView'
 import SessionDetailsView from './Components/views/SessionDetailsView';
 
-
-
 function App() {
     const [user, setUser] = useContext(UserContext);
     let userData;
