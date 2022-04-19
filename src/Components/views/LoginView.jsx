@@ -32,7 +32,7 @@ const LoginView = () => {
         </div>
 
         <div className='form-grout mb-2'>
-          <label className='form-label'>Last Name</label>
+          <label className='form-label'>Password</label>
           <input 
             type="password" placeholder='Enter your password'
             name='password' className='form-control'
