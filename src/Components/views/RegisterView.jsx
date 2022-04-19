@@ -24,7 +24,8 @@ const RegisterView = () => {
 
   return (
     <div>
-      <h2>RegisterView</h2>
+      <h2>Registration: Create an Account</h2>
+      <br />
       <form>
 
         <div className="form-grout mb-2">
@@ -114,6 +115,7 @@ const RegisterView = () => {
         >
           Create Account
         </button>
+
       </form>
     </div>
   );
