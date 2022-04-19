@@ -21,7 +21,6 @@ const GameListItem = ({ game }) => {
       <td>{game.players.length}</td>
       <td>
         <button className="btn btn-info m-1" onClick = {() => joinGame(game.id)}>Join</button>
-
         <button className="btn btn-info m-1" onClick = {() => displayGameDetails(game.id)}>Details</button>
       </td>
     </tr>

@@ -16,7 +16,7 @@ import ConfigSession from './Components/views/ConfigSession';
 import PlayerView from './Components/views/PlayerView'
 import RegisterView from './Components/views/RegisterView'
 import GameListView from './Components/views/GameListView'
-import GameView from './Components/views/GameView';
+import SessionDetailsView from './Components/views/SessionDetailsView';
 
 
 
@@ -119,7 +119,7 @@ function App() {
 
                 <Route path="/configsession" element={<ConfigSession/>}/>
 
-                <Route path="/game/:id" element={<GameView/>}/>
+                <Route path="/game/:id" element={<SessionDetailsView/>}/>
 
                 <Route path="/game/:id/player" element={<PlayerView/>}/>
                 <Route path="/register" element={<RegisterView/>}/>
