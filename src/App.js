@@ -7,17 +7,14 @@ import {UserContext} from "./store/UserContext";
 import {createGame, deleteGame, getAllGames, getGameById, updateGame} from "./services/rest-api/gameService";
 import {createUser, getAllUsers, updateUser} from "./services/rest-api/userService";
 import {GAME_STATE_TYPES} from "./services/rest-api/gameStateTypes";
-import {createPlayer} from "./services/rest-api/playerService";
+
 
 import Navbar from "./Components/Navbar/Navbar";
 import NotFoundView from './Components/views/NotFoundView';
 import LoginView from './Components/views/LoginView';
-import GameView from './Components/views/GameView';
 import PlayerView from './Components/views/PlayerView';
 import RegisterView from './Components/views/RegisterView';
 import GameListView from './Components/views/GameListView';
-import {createUser, getAllUsers, updateUser} from "./services/rest-api/userService";
-import {GAME_STATE_TYPES} from "./services/rest-api/gameStateTypes";
 import {
     createPlayer,
     getAllPlayersInGame,
@@ -30,6 +27,8 @@ import {
     getAllKillsInGame,
     getKillInGame
 } from "./services/rest-api/killService";
+import ConfigSession from "./Components/views/ConfigSession";
+import SessionDetailsView from "./Components/views/SessionDetailsView";
 
 
 function App() {
@@ -165,7 +164,7 @@ function App() {
 
     return (
         <div className="App">
-            <BrowserRouter>
+
                 <Navbar/>
 
             <Routes>
@@ -223,7 +222,7 @@ function App() {
                 <hr/>
                 <button onClick={delKill}>delKill</button>
 
-            </BrowserRouter>
+
         </div>
     );
 }
