@@ -11,6 +11,8 @@ const LoginView = () => {
 
   const loginSubmit = (e) => {
     e.preventDefault();
+    
+    // POST: /api/user
     console.log(username);
     console.log(password);
     router('/') // some logic needs to happen here before user can go back to main screen

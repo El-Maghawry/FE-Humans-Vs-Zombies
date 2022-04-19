@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { Navigate, useNavigate } from "react-router-dom";
-import GamesList from "../GamesList/GamesList";
+// import GameListItem from "../GamesList/GameListItem";
 import ConfigSession from "../views/ConfigSession";
 // import {sessionDeleteAction} from '../../store/actions/sessionActions'
 
