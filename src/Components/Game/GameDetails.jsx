@@ -1,24 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
-const GameDetails = ({ gameId }) => {
-
-  const [game, setGame] = useState({});
-
-  const getGameById = () => {
-    setGame({
-      id: gameId,
-      name: "Game 2",
-      gameState: "IN PROGRESS",
-      players: [
-        {id: "159"}, {id: "753"}, {id: "951"}, {id: "357"}
-      ]
-    });
-  }
-
-  useEffect(() => {
-    // GET: /api/game/{gameId}
-    getGameById();
-  }, [])
+const GameDetails = ({ game }) => {
 
   const editGame = () => {
   // PUT: /api/game/{gameId}
