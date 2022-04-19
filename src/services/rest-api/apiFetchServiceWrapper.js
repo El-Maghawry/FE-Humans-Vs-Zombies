@@ -8,7 +8,7 @@ async function request(url, options) {
         let response = await fetch(API_HOST + url, options);
 
         if (response.ok !== true) {
-            if (response.status == 403 || response.status == 401) {
+            if (response.status === 403 || response.status === 401) {
                 console.log("Not authorized, refreshing the access token");
 
                 let userData = JSON.parse(localStorage.getItem(`<USER>`));
@@ -31,7 +31,7 @@ async function request(url, options) {
             }
         }
 
-        if (response.status == 204) {
+        if (response.status === 204) {
             return response;
         } else {
             return response.json();

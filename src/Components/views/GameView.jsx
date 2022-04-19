@@ -1,9 +1,9 @@
 import React from 'react'
 
-const GameView = () => {
+const GameView = ({ game }) => {
   return (
     <div>
-      <h2>GameView</h2>
+      <h2>{ game.name }</h2>
     </div>
   )
 }
