@@ -1,6 +1,6 @@
 import './App.css';
 
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import {getAdminAccessToken, login, refreshUserAccessToken, registerNewUser} from "./services/keycloak/authService";
 import {useContext} from "react";
 import {UserContext} from "./store/UserContext";
@@ -111,48 +111,46 @@ function App() {
 
     return (
         <div className="App">
-            <BrowserRouter>
-                <Navbar/>
+            <Navbar/>
 
-                <Routes>
-                    <Route path="/" element={<GameListView/>}/>
-                    <Route path="/login" element={<LoginView/>}/>
+            <Routes>
+                <Route path="/" element={<GameListView/>}/>
+                <Route path="/login" element={<LoginView/>}/>
 
-                    <Route path="/configsession" element={<ConfigSession/>}/>
+                <Route path="/configsession" element={<ConfigSession/>}/>
 
-                    <Route path="/game/:id" element={<GameView/>}/>
+                <Route path="/game/:id" element={<GameView/>}/>
 
-                    <Route path="/game/:id/player" element={<PlayerView/>}/>
-                    <Route path="/register" element={<RegisterView/>}/>
-                    <Route path="*" element={<NotFoundView/>}/>
-                </Routes>
-                <br/><br/><br/><br/><br/><hr/>
+                <Route path="/game/:id/player" element={<PlayerView/>}/>
+                <Route path="/register" element={<RegisterView/>}/>
+                <Route path="*" element={<NotFoundView/>}/>
+            </Routes>
+            <br/><br/><br/><br/><br/><hr/>
 
-                <button onClick={loginFeat}> login</button>
-                <button onClick={getAdminAccessToken}> token</button>
-                <button onClick={register}>register</button>
-                <button onClick={refreshToken}>refresh token</button>
-                <button onClick={printUserData}> print user data</button>
+            <button onClick={loginFeat}> login</button>
+            <button onClick={getAdminAccessToken}> token</button>
+            <button onClick={register}>register</button>
+            <button onClick={refreshToken}>refresh token</button>
+            <button onClick={printUserData}> print user data</button>
 
-                <hr/>
-                <button onClick={createGameTest}>create game</button>
-                <hr/>
-                <button onClick={getGames}>get all games</button>
-                <hr/>
-                <button onClick={createUserInRestApi}>Create User In RestApi</button>
-                <hr/>
-                <button onClick={testUpdateUser}>testUpdateUser</button>
-                <hr/>
-                <button onClick={testGetAllUser}>test Get All User</button>
-                <hr/>
-                <button onClick={testUpdateGame}>testUpdateGame</button>
-                <hr/>
-                <button onClick={getGameByIdTest}>getGameByIdTest</button>
-                <hr/>
-                <button onClick={registerPlayerForGameTest}>registerPlayerForGameTest</button>
-                <hr/>
-                <button onClick={deleteGameTest}>deleteGameTest</button>
-            </BrowserRouter>
+            <hr/>
+            <button onClick={createGameTest}>create game</button>
+            <hr/>
+            <button onClick={getGames}>get all games</button>
+            <hr/>
+            <button onClick={createUserInRestApi}>Create User In RestApi</button>
+            <hr/>
+            <button onClick={testUpdateUser}>testUpdateUser</button>
+            <hr/>
+            <button onClick={testGetAllUser}>test Get All User</button>
+            <hr/>
+            <button onClick={testUpdateGame}>testUpdateGame</button>
+            <hr/>
+            <button onClick={getGameByIdTest}>getGameByIdTest</button>
+            <hr/>
+            <button onClick={registerPlayerForGameTest}>registerPlayerForGameTest</button>
+            <hr/>
+            <button onClick={deleteGameTest}>deleteGameTest</button>
         </div>
     );
 }

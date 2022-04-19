@@ -8,9 +8,10 @@ const GameView = () => {
 
   return (
     <div className='container'>
+      <h2>game view</h2>
       <GameDetails gameId={id}/>
     </div>
   )
-}
+} 
 
 export default GameView

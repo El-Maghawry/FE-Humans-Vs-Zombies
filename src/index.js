@@ -1,19 +1,20 @@
 import React from 'react';
-import createRoot from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import App from './App';
+import { BrowserRouter } from "react-router-dom";
 import AppContainer from './Components/hoc/AppContainer.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css';
 import UserProvider from "./store/UserContext";
 
-createRoot.render(
-  <React.StrictMode>
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
+  <BrowserRouter>
       <UserProvider>
           <AppContainer>
               <App />
           </AppContainer>
       </UserProvider>
-  </React.StrictMode>,
-
-  document.getElementById('root')
+  </BrowserRouter>
 );
