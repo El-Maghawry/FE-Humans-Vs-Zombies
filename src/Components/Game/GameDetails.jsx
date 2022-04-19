@@ -6,7 +6,7 @@ const GameDetails = ({ gameId }) => {
 
   const getGameById = () => {
     setGame({
-      id: gameId,
+      id: 65487987,
       name: "Game 2",
       gameState: "IN PROGRESS",
       players: [
@@ -18,7 +18,7 @@ const GameDetails = ({ gameId }) => {
   useEffect(() => {
     // GET: /api/game/{gameId}
     getGameById();
-  }, [game])
+  }, [])
 
   const editGame = () => {
 

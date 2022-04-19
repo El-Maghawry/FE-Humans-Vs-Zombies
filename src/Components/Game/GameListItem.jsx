@@ -20,9 +20,9 @@ const GameListItem = ({ game }) => {
       <td>{game.gameState}</td>
       <td>{game.players.length}</td>
       <td>
-        <button className="btn btn-info m-1" to={`/game/${game.id}`} onClick = {() => joinGame(game.id)}>Join</button>
+        <button className="btn btn-info m-1" onClick = {() => joinGame(game.id)}>Join</button>
 
-        <NavLink className="btn btn-info m-1" to={`/game/${game.id}`} onClick = {() => displayGameDetails(game.id)}>Details</NavLink>
+        <button className="btn btn-info m-1" onClick = {() => displayGameDetails(game.id)}>Details</button>
       </td>
     </tr>
   )

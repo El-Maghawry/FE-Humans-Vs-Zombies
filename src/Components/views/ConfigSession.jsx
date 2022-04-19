@@ -6,10 +6,13 @@ const ConfigSession = () => {
 
   const [title, setTitle] = useState("");
 
+  const createGame = () => {
+    // POST: api/game
+  }
 
   const sessionSubmit = (e) => {
     e.preventDefault();
-
+    createGame(); // Check if name is taken in back end.
     router("/"); // some logic needs to happen here before user can go back to main screen
   };
   return (
@@ -38,7 +41,7 @@ const ConfigSession = () => {
           className="btn btn-danger border-warning m-1"
           onClick={(e) => sessionSubmit(e)}
         >
-          Initate Session
+          Initiate Session
         </button>
       </form>
     </div>

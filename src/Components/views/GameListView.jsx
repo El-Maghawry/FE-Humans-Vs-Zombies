@@ -43,9 +43,11 @@ const GameListView = () => {
 
       <table className="table table-bordered table-striped">
         <thead>
-          <th>Games</th>
-          <th>State</th>
-          <th>Players</th>
+          <tr>
+            <th>Games</th>
+            <th>State</th>
+            <th>Players</th>
+          </tr>
         </thead>
         <tbody>
           {
