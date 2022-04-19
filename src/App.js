@@ -16,6 +16,7 @@ import ConfigSession from './Components/views/ConfigSession';
 import PlayerView from './Components/views/PlayerView'
 import RegisterView from './Components/views/RegisterView'
 import GameListView from './Components/views/GameListView'
+import GameView from './Components/views/GameView';
 
 
 
