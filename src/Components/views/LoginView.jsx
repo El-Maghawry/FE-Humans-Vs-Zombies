@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 
 const LoginView = () => {
+
+  const router = useNavigate();
    
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -9,6 +13,7 @@ const LoginView = () => {
     e.preventDefault();
     console.log(username);
     console.log(password);
+    router('/') // some logic needs to happen here before user can go back to main screen
   }
 
   return (
