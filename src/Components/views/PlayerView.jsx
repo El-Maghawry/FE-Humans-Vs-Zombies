@@ -1,9 +1,10 @@
 import React from 'react'
+import PlayerForm from '../PlayerForm/PlayerForm'
 
-const PlayerView = () => {
+const PlayerView = ({ gameId }) => {
   return (
     <div>
-      <h2>PlayerView</h2>
+      <PlayerForm />
     </div>
   )
 }

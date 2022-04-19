@@ -116,7 +116,11 @@ function App() {
                 <Routes>
                     <Route path="/" element={<GameListView/>}/>
                     <Route path="/login" element={<LoginView/>}/>
+
                     <Route path="/configsession" element={<ConfigSession/>}/>
+
+                    <Route path="/game/:id" element={<GameView/>}/>
+
                     <Route path="/game/:id/player" element={<PlayerView/>}/>
                     <Route path="/register" element={<RegisterView/>}/>
                     <Route path="*" element={<NotFoundView/>}/>
