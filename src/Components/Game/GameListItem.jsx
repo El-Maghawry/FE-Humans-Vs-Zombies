@@ -1,8 +1,7 @@
 import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 
-const GameListItem = ({ game }) => {
-
+const GameListItem = (props) => {
   const navigate = useNavigate();
 
   const joinGame = (gameId) => {
@@ -16,12 +15,12 @@ const GameListItem = ({ game }) => {
 
   return (
     <tr>
-      <td>{game.name}</td>
-      <td>{game.gameState}</td>
-      <td>{game.players.length}</td>
+      <td>{props.game.name}</td>
+      <td>{props.game.gameState}</td>
+      <td>{props.game.players.length}</td>
       <td>
-        <button className="btn btn-info m-1" onClick = {() => joinGame(game.id)}>Join</button>
-        <button className="btn btn-info m-1" onClick = {() => displayGameDetails(game.id)}>Details</button>
+        <button className="btn btn-info m-1" onClick = {() => joinGame(props.game.gameId)}>Join</button>
+        <button className="btn btn-info m-1" onClick = {() => displayGameDetails(props.game.gameId)}>Details</button>
       </td>
     </tr>
   )
