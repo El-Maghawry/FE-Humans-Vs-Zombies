@@ -2,6 +2,8 @@ import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 
 const GameListItem = (props) => {
+    let userData = JSON.parse(localStorage.getItem('<USER>'));
+
   const navigate = useNavigate();
 
   const joinGame = (gameId) => {
@@ -13,15 +15,21 @@ const GameListItem = (props) => {
     navigate(`/game/${gameId}`);
   }
 
+  console.log(props.game)
   return (
     <tr>
       <td>{props.game.name}</td>
-      <td>{props.game.gameState}</td>
+      <td>{props.game.state}</td>
       <td>{props.game.players.length}</td>
-      <td>
-        <button className="btn btn-info m-1" onClick = {() => joinGame(props.game.gameId)}>Join</button>
-        <button className="btn btn-info m-1" onClick = {() => displayGameDetails(props.game.gameId)}>Details</button>
-      </td>
+        {
+            userData ?
+                <td>
+                    <button className="btn btn-info m-1" onClick = {() => joinGame(props.game.id)}>Join</button>
+                    <button className="btn btn-info m-1" onClick = {() => displayGameDetails(props.game.id)}>Details</button>
+                </td>
+                : ''
+        }
+
     </tr>
   )
 }
