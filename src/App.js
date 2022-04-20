@@ -5,7 +5,7 @@ import {getAdminAccessToken, login, refreshUserAccessToken, registerNewUser} fro
 import {useContext} from "react";
 import {UserContext} from "./store/UserContext";
 import {createGame, deleteGame, getAllGames, getGameById, updateGame} from "./services/rest-api/gameService";
-import {createUser, getAllUsers, updateUser} from "./services/rest-api/userService";
+import {createUserInApi, getAllUsers, updateUser} from "./services/rest-api/userService";
 import {GAME_STATE_TYPES} from "./services/rest-api/gameStateTypes";
 
 
@@ -36,13 +36,8 @@ function App() {
     let userData;
 
     async function loginFeat() {
-        userData = await login('philipp', "123321");
-
-        setUser({
-            username: 'petar',
-            access_token: userData.access_token,
-            refresh_token: userData.refresh_token
-        });
+        debugger;
+        userData = await login('petar', "123321");
     }
 
     async function register() {
@@ -67,7 +62,7 @@ function App() {
     }
 
     async function createGameTest() {
-        let game = await createGame(`testGameFromReact`);
+        let game = await createGame(`second testGameFromReact`, 'second test game desc ');
 
         console.log(game);
     }
@@ -78,7 +73,7 @@ function App() {
     }
 
     async function createUserInRestApi() {
-        const userData = await createUser();
+        const userData = await createUserInApi();
         console.log(userData);
     }
 
@@ -98,7 +93,7 @@ function App() {
     }
 
     async function testUpdateGame(){
-        let data = await updateGame(1,{gameState: GAME_STATE_TYPES.in_progress});
+        let data = await updateGame(5,{gameState: GAME_STATE_TYPES.in_progress});
         console.log(data);
     }
 
@@ -108,7 +103,7 @@ function App() {
     }
 
     async function deleteGameTest(){
-       console.log( await deleteGame(1));
+       console.log( await deleteGame(2));
     }
 
     async function registerPlayerForGameTest(){

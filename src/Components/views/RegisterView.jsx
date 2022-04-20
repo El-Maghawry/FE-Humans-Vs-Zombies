@@ -1,7 +1,6 @@
 import React, {useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {get} from "../../services/rest-api/apiFetchServiceWrapper";
-// import Select from 'react-select'
+import {registerNewUser} from "../../services/keycloak/authService";
 
 const RegisterView = () => {
     const router = useNavigate();
@@ -19,7 +18,7 @@ const RegisterView = () => {
     let passwordReValue = '';
     let passwordReRef = useRef();
 
-    const registerSubmit = (e) => {
+    const registerSubmit = async (e) => {
         e.preventDefault();
         getRefs();
 
@@ -43,7 +42,9 @@ const RegisterView = () => {
             return;
         }
 
-        console.log('all fields are filled');
+        await registerNewUser(firstnameValue, lastnameValue, emailValue, usernameValue, passwordValue);
+
+        router("/");
     };
 
     function getRefs() {

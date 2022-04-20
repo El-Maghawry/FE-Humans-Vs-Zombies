@@ -1,3 +1,5 @@
+import {createUserInApi} from "../rest-api/userService";
+
 const AUTH_HOST = 'https://app-keycloak-prod.herokuapp.com';
 const HVZ_PROD_CLIENT = "hvz-prod";
 const HVZ_LOCAL_CLIENT = "hvz-local";
@@ -10,7 +12,7 @@ const ADMIN_PASSWORD = 'admin';
 const GRANT_TYPE = 'password';
 const CLIENT_ID = 'admin-cli';
 
- async function getAdminAccessToken() {
+async function getAdminAccessToken() {
     const adminBody = {
         'username': ADMIN_USERNAME,
         'password': ADMIN_PASSWORD,
@@ -41,7 +43,7 @@ const CLIENT_ID = 'admin-cli';
     }
 }
 
- async function registerNewUser(firstname, lastname, email, username, password) {
+async function registerNewUser(firstname, lastname, email, username, password) {
     /*
     first we need to get a valid admin access token by clicking on the Get Admin Access Token button,
     then simply we are making the following request
@@ -63,6 +65,7 @@ const CLIENT_ID = 'admin-cli';
     };
 
     try {
+        debugger
         const response = await fetch(USER_REGISTER_ENDPOINT, {
             method: 'POST',
             headers: {
@@ -79,13 +82,21 @@ const CLIENT_ID = 'admin-cli';
             throw new Error('User registration not successful');
         }
 
-        console.log(`${username} was registered`);
+        // await Promise.all([
+        //     login(newUserData.username, newUserData.password),
+        //     createUserInApi()
+        // ]);
+
+        await login(newUserData.username, newUserData.credentials[0].value);
+        await createUserInApi();
+
+        console.log(`${username} was registered and logged in`);
     } catch (e) {
         console.log(e.stackTrace);
     }
 }
 
- async function login(username, password) {
+async function login(username, password) {
     const userLoginData = {
         'client_id': HVZ_PROD_CLIENT,
         'username': username,
@@ -114,8 +125,18 @@ const CLIENT_ID = 'admin-cli';
 
         responseUserData = await response.json();
 
+        let jwtPayload = parseJwt(responseUserData.access_token);
+        let isUserAdmin = false;
+
+        if (jwtPayload.roles) {
+            isUserAdmin = jwtPayload.roles.includes('admin-role');
+        }
+
         responseUserData.username = username;
+        responseUserData.isAdmin = isUserAdmin;
         localStorage.setItem('<USER>', JSON.stringify(responseUserData));
+
+
         return responseUserData;
 
     } catch (e) {
@@ -123,8 +144,18 @@ const CLIENT_ID = 'admin-cli';
     }
 }
 
+function parseJwt(token) {
+    let base64Url = token.split('.')[1];
+    let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    let jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
 
- async function refreshUserAccessToken(refresh_token) {
+    return JSON.parse(jsonPayload);
+}
+
+
+async function refreshUserAccessToken(refresh_token) {
     const userLoginData = {
         'client_id': HVZ_PROD_CLIENT,
         'grant_type': 'refresh_token',
@@ -156,6 +187,13 @@ const CLIENT_ID = 'admin-cli';
         if (oldUserData) {
             responseUserData.username = oldUserData.username;
             localStorage.removeItem('<USER>');
+            let jwtPayload = parseJwt(responseUserData.access_token);
+            let isUserAdmin = false;
+
+            if (jwtPayload.roles) {
+                isUserAdmin = jwtPayload.roles.includes('admin-role');
+            }
+            responseUserData.isAdmin = isUserAdmin;
             localStorage.setItem('<USER>', JSON.stringify(responseUserData));
         }
 
@@ -166,18 +204,18 @@ const CLIENT_ID = 'admin-cli';
     }
 }
 
- function logout() {
+function logout() {
     localStorage.clear();
     return true;
 }
 
-export{
+export {
     getAdminAccessToken,
     registerNewUser,
     login,
     refreshUserAccessToken,
     logout
-}
+};
 
 
 /*

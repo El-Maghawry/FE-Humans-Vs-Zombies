@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import GameDetails from '../Game/GameDetails';
 import {useParams} from 'react-router-dom';
-import {getAllGames, getGameById} from "../../services/rest-api/gameService";
+import {getGameById} from "../../services/rest-api/gameService";
 
 const SessionDetailsView = () => {
+
     const {id} = useParams();
     const [game, setGame] = useState({});
 
     async function fetchData() {
-        let game = await getGameById(2);
+        let game = await getGameById(id);
         setGame(game);
     }
 

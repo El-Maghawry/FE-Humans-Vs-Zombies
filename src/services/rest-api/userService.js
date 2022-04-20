@@ -1,6 +1,6 @@
 import {get, post, put} from "./apiFetchServiceWrapper";
 
-async function createUser() {
+async function createUserInApi() {
     return await post('/user');
 }
 
@@ -12,4 +12,4 @@ async function updateUser(userId, userData) {
     return await put(`/user/${userId}`, userData);
 }
 
-export {createUser, getAllUsers, updateUser};
+export {createUserInApi, getAllUsers, updateUser};
