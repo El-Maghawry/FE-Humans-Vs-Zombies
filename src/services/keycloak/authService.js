@@ -65,7 +65,7 @@ async function registerNewUser(firstname, lastname, email, username, password) {
     };
 
     try {
-        debugger
+
         const response = await fetch(USER_REGISTER_ENDPOINT, {
             method: 'POST',
             headers: {
