@@ -24,7 +24,7 @@ const LoginView = () => {
         <div>
             <form>
                 <div className="form-grout mb-2">
-                    <label className="form-label">username</label>
+                    <label className="form-label">Username</label>
                     <input
                         type="text" placeholder="Enter username"
                         name="username" className="form-control"

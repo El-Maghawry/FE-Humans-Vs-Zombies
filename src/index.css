@@ -32,8 +32,13 @@ code {
   padding: 6px;
 }
 .navbar a:hover {
-  color: #f1356d;
+  color: red;
 }
+
+.navbar button:hover {
+  color: red;
+}
+
 .content {
   max-width: 600px;
   margin: 40px auto;
