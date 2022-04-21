@@ -29,7 +29,25 @@ const GameDetails = (props) => {
             );
         }
     };
-
+/*
+{
+    "id": 5,
+    "keycloakId": "12be62f4-030d-4d28-a6c2-84f78aa9f390",
+    "username": "philipp",
+    "firstName": "Philipp",
+    "lastName": "Loibl",
+    "isAdmin": true,
+    "player": {
+        "id": 10,
+        "isHuman": true,
+        "isZombie": false,
+        "username": "philipp",
+        "biteCode": "55131",
+        "kills": [],
+        "hibernateLazyInitializer"
+    }
+}
+ */
     const gameUpdateForm = (e) => {
         e.preventDefault();
         setTitle(props.game.name);

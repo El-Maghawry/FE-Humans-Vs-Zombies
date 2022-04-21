@@ -8,8 +8,17 @@ async function getAllUsers() {
     return await get('/user');
 }
 
+async function getUserByUsername(username){
+    return await get(`/user/${username}`);
+}
+
 async function updateUser(userId, userData) {
     return await put(`/user/${userId}`, userData);
 }
 
-export {createUserInApi, getAllUsers, updateUser};
+export {
+    createUserInApi,
+    getAllUsers,
+    updateUser,
+    getUserByUsername
+};

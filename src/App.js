@@ -5,7 +5,7 @@ import {getAdminAccessToken, login, refreshUserAccessToken, registerNewUser} fro
 import {useContext} from "react";
 import {UserContext} from "./store/UserContext";
 import {createGame, deleteGame, getAllGames, getGameById, updateGame} from "./services/rest-api/gameService";
-import {createUserInApi, getAllUsers, updateUser} from "./services/rest-api/userService";
+import {createUserInApi, getAllUsers, getUserByUsername, updateUser} from "./services/rest-api/userService";
 import {GAME_STATE_TYPES} from "./services/rest-api/gameStateTypes";
 
 
@@ -37,7 +37,6 @@ function App() {
     let userData;
 
     async function loginFeat() {
-        debugger;
         userData = await login('petar', "123321");
     }
 
@@ -158,6 +157,11 @@ function App() {
         console.log(data);
     }
 
+    async function getUser(){
+        const data = await getUserByUsername('petar');
+        console.log(data);
+    }
+
     return (
         <div className="App">
 
@@ -220,7 +224,8 @@ function App() {
                 <hr/>
                 <button onClick={delKill}>delKill</button>
 
-
+                 <hr/>
+                 <button onClick={getUser}>get user by username</button>
         </div>
     );
 }
