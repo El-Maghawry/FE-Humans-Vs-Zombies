@@ -1,10 +1,11 @@
 import {get, post, del, put} from "./apiFetchServiceWrapper";
 import {GAME_STATE_TYPES} from './gameStateTypes';
 
-async function createGame(gameName) {
+async function createGame(name, description) {
     let game = {
-        'gameName': gameName
-    }
+        'name': name,
+        'description': description
+    };
     return post('/game', game);
 }
 
@@ -43,4 +44,5 @@ export {
     getAllGames,
     getGameById,
     deleteGame,
-    updateGame};
+    updateGame
+};

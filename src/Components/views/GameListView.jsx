@@ -11,9 +11,9 @@ const GameListView = () => {
     }
 
     useEffect(() => {
-      fetchData();
+        fetchData();
     }, []);
-console.log(games);
+
     return (
         <div className="container">
             <table className="table table-bordered table-striped">

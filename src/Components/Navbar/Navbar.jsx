@@ -1,31 +1,51 @@
-import {Link, NavLink} from "react-router-dom";
-import {Navigate, useNavigate} from "react-router-dom";
-// import GameListItem from "../GamesList/GameListItem";
-import ConfigSession from "../views/ConfigSession";
-// import {sessionDeleteAction} from '../../store/actions/sessionActions'
+import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import {logout} from "../../services/keycloak/authService";
 
 const Navbar = () => {
     const router = useNavigate();
-    // function removeSession() {
-    //     dispatch(sessionDeleteAction())
-    // }
+    const userData = JSON.parse(localStorage.getItem('<USER>'));
+
     const onNewGameButton = () => {
         router("/configsession");
     };
 
+    function signOut() {
+        logout();
+        router('/');
+    }
+
     return (
-        <nav className="navbar mt-3 mb-5 bg-warning rounded">
-            <h1 className="px-3"> 🥷🏿 Humans Vs. Zombies 🧟‍♂️ </h1>
-            <div className="links p-2">
-                <Link to="/Login">Login | </Link>
-                <Link to="/Register">Register | </Link>
-                <Link to="/profile">Profile</Link>
-                {/* <NavLink onClick={removeSession} to="/">Log-Out</NavLink> */}
-                <button className="btn btn-danger m-2 p-2" onClick={onNewGameButton}>
-                    New Game
-                </button>
-            </div>
-        </nav>
+        <>
+            <nav className="navbar mt-3 mb-5 bg-warning rounded">
+                <h1 className="px-3"> 🥷🏿 Humans Vs. Zombies 🧟‍♂️ </h1>
+                {
+                    userData ?
+                        <div className="links p-2">
+                            <p className="mx-4 mt-2">Welcome {userData.username}</p>
+                            <Link className="btn btn-dark m-2 p-2" to="/">Home</Link>
+                            <button className="btn links btn-dark m-2 p-2" onClick={signOut}>
+                                Logout
+                            </button>
+                            {
+                                userData.isAdmin
+                                    ?
+                                    <button className="btn btn-dark m-2 p-2" onClick={onNewGameButton}>
+                                        New Game
+                                    </button>
+                                    : <Link className="btn btn-danger m-2 p-2" to="/">Home</Link>
+                            }
+                        </div>
+                        :
+                        <div className="links p-2">
+                            <Link className="btn btn-danger m-2 p-2" to="/">Home</Link>
+                            <Link className="btn btn-danger m-2 p-2" to="/login">Login</Link>
+                            <Link className="btn btn-danger m-2 p-2" to="/register">Register</Link>
+                        </div>
+                }
+            </nav>
+
+        </>
     );
 };
 

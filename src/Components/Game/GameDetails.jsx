@@ -1,64 +1,128 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {useNavigate} from "react-router-dom";
+import {getGameById, updateGame} from '../../services/rest-api/gameService';
 
 const GameDetails = (props) => {
-/*
-{
-    "gameId": 2,
-    "name": "testGameFromReact",
-    "gameState": "REGISTRATION",
-    "players": [
-        {
-            "id": 4,
-            "userId": 1,
-            "gameId": 2,
-            "isHuman": true,
-            "isZombie": false,
-            "biteCode": "[99, 56, 50, 54, 100, 49, 48, 102, 45, 99, 98, 50, 56, 45, 52, 54, 98, 53, 45, 97, 54, 56, 53, 45, 54, 55, 102, 54, 48, 53, 49, 99, 99, 97, 98, 48]"
-        },
-        {
-            "id": 5,
-            "userId": 2,
-            "gameId": 2,
-            "isHuman": true,
-            "isZombie": false,
-            "biteCode": "[54, 101, 57, 99, 50, 101, 54, 50, 45, 57, 55, 98, 55, 45, 52, 49, 55, 50, 45, 57, 101, 55, 49, 45, 98, 52, 100, 97, 53, 101, 48, 102, 53, 101, 50, 55]"
-        },
-        {
-            "id": 6,
-            "userId": 5,
-            "gameId": 2,
-            "isHuman": true,
-            "isZombie": false,
-            "biteCode": "[49, 50, 98, 101, 54, 50, 102, 52, 45, 48, 51, 48, 100, 45, 52, 100, 50, 56, 45, 97, 54, 99, 50, 45, 56, 52, 102, 55, 56, 97, 97, 57, 102, 51, 57, 48]"
-        }
-    ]
-}
- */
+
+    const [title, setTitle] = useState("");
+    const [gameState, setGameState] = useState("");
+    let gameId = props.game.id;
+
+    const navigate = useNavigate();
+
+    let userData = JSON.parse(localStorage.getItem('<USER>'));
+    let isUserAdmin = false;
+
+    if (userData) {
+        isUserAdmin = userData.isAdmin;
+    }
+
     const renderPlayers = () => {
-        console.log(props.game);
-         return props.game.players.map(player =>
-             (
-                 <div key={player.id}>
-                     <p>Player: {player.id}</p>
-                     <p>Username: {player.username}</p>
-                     <p>Player type: {player.isHuman ? 'human': 'zombie'}</p>
-                 </div>
-             )
-         );
+        if (props.game.players) {
+            return props.game.players.map(player =>
+                <div key={player.id}>
+                    <p>Player: {player.id}</p>
+                    <p>Username: {player.username}</p>
+                    <p>Player type: {player.isHuman ? 'human' : 'zombie'}</p>
+                    <hr/>
+                </div>
+            );
+        }
     };
+
+    const gameUpdateForm = (e) => {
+        e.preventDefault();
+        setTitle(props.game.name);
+        setGameState(props.game.state);
+    };
+
+
+    const saveGameUpdate = async (event) => {
+        event.preventDefault();
+        // PUT: api/game/{id}
+
+         const gameChanges = {title, gameState};
+         console.log(title);
+         console.log(gameState);
+        // await updateGame(props.game.id, gameChanges);
+        navigate(`/game/${props.game.id}`);
+    };
+
+    const deleteGame = () => {
+
+    };
+
+    const startGame = async() => {
+      let game = await getGameById(gameId);
+      let gamePlayers = setZombies(game.players);
+
+      console.log(gamePlayers);
+    };
+
+    function setZombies(players, probability = 10) {
+        let hasZombie = false;
+
+        players.forEach(p => {
+            if (p.isZombie) {
+                hasZombie = true;
+            }
+        });
+
+        if (!hasZombie) {
+            players.forEach((p, index) => p.isZombie = index % probability === 0);
+        }
+
+        return players;
+    }
 
     return (
         <div>
             <h2>{props.game.name}</h2>
-            <p>Game state: {props.game.gameState}</p>
+            <p>Game state: {props.game.state}</p>
             <br/>
             <div>{renderPlayers()}</div>
             <br/>
             <div>
-        <span>
-          <button className="btn btn-info">Edit</button>
-        </span>
+            <span>
+                {
+                    isUserAdmin &&
+                    <div>
+                        <button className="btn btn-secondary m-1" onClick={gameUpdateForm}>Edit</button>
+                        <button className="btn btn-success m-1" onClick={startGame}>Start Game</button>
+                        <button className="btn btn-success m-1">Delete Game</button>
+                    </div>
+                }
+            </span>
             </div>
+            {
+                title &&
+                    <div  className='container mt-2'>
+                        <h3>Game update</h3>
+                        <form>
+                            <div className="form-grout mb-2">
+                                <label className="form-label">Game title:</label>
+                                <input
+                                    type="text"
+                                    name="title" className="form-control"
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
+                                />
+                            </div>
+
+                            <div className="form-grout mb-2">
+                                <label className="form-label">Game state:</label>
+                                <input
+                                    type="text"
+                                    name="game-state" className="form-control"
+                                    value={gameState}
+                                    onChange={(e) => setGameState(e.target.value)}
+                                />
+                            </div>
+
+                            <button className="btn btn-secondary m-1" onClick={(e) => saveGameUpdate(e)}>Save</button>
+                        </form>
+                    </div>
+            }
         </div>
     );
 };

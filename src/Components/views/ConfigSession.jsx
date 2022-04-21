@@ -1,51 +1,53 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useRef, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {createGame} from "../../services/rest-api/gameService";
 
 const ConfigSession = () => {
-  const router = useNavigate();
+    const router = useNavigate();
+    let descRef = useRef();
+    let titleRef = useRef();
 
-  const [title, setTitle] = useState("");
+    const sessionSubmit = async (e) => {
+        e.preventDefault();
+        let title = titleRef.current.value;
+        let description = descRef.current.value;
 
-  const createGame = () => {
-    // POST: api/game
-  }
+       const gameRes = await createGame(title, description);
 
-  const sessionSubmit = (e) => {
-    e.preventDefault();
-    createGame(); // Check if name is taken in back end.
-    router("/"); // some logic needs to happen here before user can go back to main screen
-  };
-  return (
-    // Each newly started session should be on status Registration.
-    // Should get an automatic Id
-    // Player automatically to 0
-    // What other information needs to be considered
-    // The game needs to contain the new session after clicking on Submit
-    // some logic needs to happen here before user can go back to main screen
+       console.log(gameRes);
+    };
+    return (
+        <div>
+            <form>
+                <div className="form-grout mb-2">
+                    <label className="form-label">Titel Game</label>
 
-    <div>
-      <form>
-        <div className="form-grout mb-2">
-          <label className="form-label">Titel Game</label>
-          <input
-            type="text"
-            placeholder="Enter title of the game"
-            name="title"
-            className="form-control"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
+                    <input
+                        type="text"
+                        placeholder="Enter title of the game"
+                        name="title"
+                        className="form-control"
+                        ref={titleRef}
+
+                    />
+                    <br/>
+                    <textarea
+                        placeholder="Enter description of the game"
+                        name="description"
+                        className="form-control"
+                        ref={descRef}
+                    />
+                </div>
+
+                <button
+                    className="btn btn-danger border-warning m-1"
+                    onClick={(e) => sessionSubmit(e)}
+                >
+                    Create Game
+                </button>
+            </form>
         </div>
-
-        <button
-          className="btn btn-danger border-warning m-1"
-          onClick={(e) => sessionSubmit(e)}
-        >
-          Initiate Session
-        </button>
-      </form>
-    </div>
-  );
+    );
 };
 
 export default ConfigSession;
