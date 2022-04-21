@@ -22,7 +22,7 @@ const Navbar = () => {
                 {
                     userData ?
                         <div className="links p-2">
-                            <h6 className=" btn btn-light mx-4 mt-2 text-capitalize" to="/profile">Welcome {userData.username}👤</h6>
+                            <h6 className=" btn btn-light mx-4 mt-2 text-capitalize"><Link to="/profile">Welcome {userData.username}👤</Link></h6>
                             <Link className="btn btn-dark m-2 p-2" to="/">Home</Link>
                             <button className="btn links btn-dark m-2 p-2" onClick={signOut}>
                                 Logout
