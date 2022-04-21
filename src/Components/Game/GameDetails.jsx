@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {getGameById, updateGame} from '../../services/rest-api/gameService';
+import {updatePlayerInGame} from "../../services/rest-api/playerService";
+import {GAME_STATE_TYPES} from "../../services/rest-api/gameStateTypes";
 
 const GameDetails = (props) => {
 
@@ -29,25 +31,7 @@ const GameDetails = (props) => {
             );
         }
     };
-/*
-{
-    "id": 5,
-    "keycloakId": "12be62f4-030d-4d28-a6c2-84f78aa9f390",
-    "username": "philipp",
-    "firstName": "Philipp",
-    "lastName": "Loibl",
-    "isAdmin": true,
-    "player": {
-        "id": 10,
-        "isHuman": true,
-        "isZombie": false,
-        "username": "philipp",
-        "biteCode": "55131",
-        "kills": [],
-        "hibernateLazyInitializer"
-    }
-}
- */
+
     const gameUpdateForm = (e) => {
         e.preventDefault();
         setTitle(props.game.name);
@@ -59,9 +43,9 @@ const GameDetails = (props) => {
         event.preventDefault();
         // PUT: api/game/{id}
 
-         const gameChanges = {title, gameState};
-         console.log(title);
-         console.log(gameState);
+        const gameChanges = {title, gameState};
+        console.log(title);
+        console.log(gameState);
         // await updateGame(props.game.id, gameChanges);
         navigate(`/game/${props.game.id}`);
     };
@@ -70,14 +54,15 @@ const GameDetails = (props) => {
 
     };
 
-    const startGame = async() => {
-      let game = await getGameById(gameId);
-      let gamePlayers = setZombies(game.players);
-
-      console.log(gamePlayers);
+    const startGame = async () => {
+        let game = await getGameById(gameId);
+        let gamePlayers = await setZombies(game.players);
+        await updateGame(gameId,{gameState:GAME_STATE_TYPES.in_progress})
+        navigate(`/game/${props.game.id}`);
+        console.log(gamePlayers);
     };
 
-    function setZombies(players, probability = 10) {
+   async function setZombies(players, probability = 10) {
         let hasZombie = false;
 
         players.forEach(p => {
@@ -88,9 +73,21 @@ const GameDetails = (props) => {
 
         if (!hasZombie) {
             players.forEach((p, index) => p.isZombie = index % probability === 0);
+            await updatePlayers(players);
         }
 
         return players;
+    }
+
+    async function updatePlayers(players) {
+        for (const player of players) {
+            if(player.isZombie){
+                await updatePlayerInGame(gameId,player.id,{
+                    human:false,
+                    zombie: player.isZombie
+                })
+            }
+        }
     }
 
     return (
@@ -107,40 +104,57 @@ const GameDetails = (props) => {
                     <div>
                         <button className="btn btn-secondary m-1" onClick={gameUpdateForm}>Edit</button>
                         <button className="btn btn-success m-1" onClick={startGame}>Start Game</button>
-                        <button className="btn btn-success m-1">Delete Game</button>
+                        <button className="btn btn-danger m-1">Delete Game</button>
                     </div>
                 }
             </span>
             </div>
             {
                 title &&
-                    <div  className='container mt-2'>
-                        <h3>Game update</h3>
-                        <form>
-                            <div className="form-grout mb-2">
-                                <label className="form-label">Game title:</label>
-                                <input
-                                    type="text"
-                                    name="title" className="form-control"
-                                    value={title}
-                                    onChange={(e) => setTitle(e.target.value)}
-                                />
-                            </div>
+                <div className="container mt-2">
+                    <h3>Game update</h3>
+                    <form>
+                        <div className="form-grout mb-2">
+                            <label className="form-label">Game title:</label>
+                            <input
+                                type="text"
+                                name="title" className="form-control"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                            />
+                        </div>
 
-                            <div className="form-grout mb-2">
-                                <label className="form-label">Game state:</label>
-                                <input
-                                    type="text"
-                                    name="game-state" className="form-control"
-                                    value={gameState}
-                                    onChange={(e) => setGameState(e.target.value)}
-                                />
-                            </div>
+                        <div className="form-grout mb-2">
+                            <label className="form-label">Game state:</label>
+                            <input
+                                type="text"
+                                name="game-state" className="form-control"
+                                value={gameState}
+                                onChange={(e) => setGameState(e.target.value)}
+                            />
+                        </div>
 
-                            <button className="btn btn-secondary m-1" onClick={(e) => saveGameUpdate(e)}>Save</button>
-                        </form>
-                    </div>
+                        <button className="btn btn-secondary m-1" onClick={(e) => saveGameUpdate(e)}>Save</button>
+                    </form>
+                </div>
             }
+
+            <div className="d-flex flex-row p-1 justify-content-around">
+                {/*this should go in its own component*/}
+                <div className="map-box p-6 border-1 m-1">
+                    <h4>Map</h4>
+                    <div>
+                        <p>Map from Google api goes here</p>
+                    </div>
+                </div>
+                {/*this should go in its own component*/}
+                <div className="chat-box p-6 border-1 m-1">
+                    <h4>Chat</h4>
+                    <div>
+                        <p>Chat content goes here</p>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
