@@ -23,14 +23,14 @@ const Navbar = () => {
                     userData ?
                         <div className="links p-2">
                             <p className="mx-4 mt-2">Welcome {userData.username}</p>
-                            <Link className="btn btn-danger m-2 p-2" to="/">Home</Link>
-                            <button className="btn btn-danger m-2 p-2" onClick={signOut}>
+                            <Link className="btn btn-dark m-2 p-2" to="/">Home</Link>
+                            <button className="btn links btn-dark m-2 p-2" onClick={signOut}>
                                 Logout
                             </button>
                             {
                                 userData.isAdmin
                                     ?
-                                    <button className="btn btn-danger m-2 p-2" onClick={onNewGameButton}>
+                                    <button className="btn btn-dark m-2 p-2" onClick={onNewGameButton}>
                                         New Game
                                     </button>
                                     : <Link className="btn btn-danger m-2 p-2" to="/">Home</Link>

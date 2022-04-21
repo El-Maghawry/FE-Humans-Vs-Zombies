@@ -175,7 +175,8 @@ function App() {
                 <Route path="*" element={<NotFoundView/>}/>
             </Routes>
             <br/><br/><br/><br/><br/><hr/>
-
+                <h3>Testing Area</h3>
+            <br/>
                 <button onClick={loginFeat}> login</button>
                 <button onClick={getAdminAccessToken}> token</button>
                 <button onClick={register}>register</button>

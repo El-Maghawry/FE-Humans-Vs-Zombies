@@ -4,7 +4,7 @@ import PlayerForm from '../PlayerForm/PlayerForm'
 const PlayerView = ({ gameId }) => {
   return (
     <div>
-      <PlayerForm />
+
     </div>
   )
 }
