@@ -8,7 +8,6 @@ async function request(url, options) {
         let response = await fetch(API_HOST + url, options);
 
         if (response.ok !== true) {
-            debugger
             if (response.status === 403 || response.status === 401) {
                 console.log("Not authorized, refreshing the access token");
 

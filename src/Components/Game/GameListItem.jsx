@@ -32,7 +32,7 @@ const GameListItem = (props) => {
         //         ? playerType = 'human'
         //         : playerType = 'zombie';
 
-        playerType = getRandomPlayerType(0.8);
+        playerType = getRandomPlayerType();
 
         const playerData = await createPlayer(gameId, {
             human: playerType === 'human',
@@ -57,13 +57,12 @@ const GameListItem = (props) => {
             <td>{props.game.state}</td>
             <td>{props.game.players.length}</td>
             {
-                userData ?
+                userData &&
                     <td>
                         <button className="btn btn-success m-1" onClick={() => joinGame(props.game.id)}>Join</button>
                         <button className="btn btn-secondary m-1" onClick={() => displayGameDetails(props.game.id)}>Details
                         </button>
                     </td>
-                    : ''
             }
 
         </tr>

@@ -116,7 +116,7 @@ function App() {
     }
 
     async function getPlayersInGame() {
-        const data = await getAllPlayersInGame(2);
+        const data = await getAllPlayersInGame(4);
         console.log(data);
     }
 
@@ -158,7 +158,7 @@ function App() {
     }
 
     async function getUser(){
-        const data = await getUserByUsername('petar');
+        const data = await getUserByUsername('natasha');
         console.log(data);
     }
 
