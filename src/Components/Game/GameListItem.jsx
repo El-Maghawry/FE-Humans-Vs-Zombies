@@ -59,7 +59,10 @@ const GameListItem = (props) => {
             {
                 userData &&
                     <td>
-                        <button className="btn btn-success m-1" onClick={() => joinGame(props.game.id)}>Join</button>
+                        {
+                            props.game.state === "REGISTRATION" &&
+                                <button className="btn btn-success m-1" onClick={() => joinGame(props.game.id)}>Join</button>
+                        }
                         <button className="btn btn-secondary m-1" onClick={() => displayGameDetails(props.game.id)}>Details
                         </button>
                     </td>

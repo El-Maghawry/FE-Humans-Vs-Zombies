@@ -22,7 +22,7 @@ const Navbar = () => {
                 {
                     userData ?
                         <div className="links p-2">
-                            <p className="mx-4 mt-2 text-capitalize">Welcome {userData.username}</p>
+                            <h6 className=" btn btn-light mx-4 mt-2 text-capitalize" to="/profile">Welcome {userData.username}👤</h6>
                             <Link className="btn btn-dark m-2 p-2" to="/">Home</Link>
                             <button className="btn links btn-dark m-2 p-2" onClick={signOut}>
                                 Logout
@@ -33,14 +33,14 @@ const Navbar = () => {
                                     <button className="btn btn-dark m-2 p-2" onClick={onNewGameButton}>
                                         New Game
                                     </button>
-                                    : <Link className="btn btn-danger m-2 p-2" to="/">Home</Link>
+                                    : <Link className="btn btn-dark m-2 p-2" to="/">Home</Link>
                             }
                         </div>
                         :
                         <div className="links p-2">
-                            <Link className="btn btn-danger m-2 p-2" to="/">Home</Link>
-                            <Link className="btn btn-danger m-2 p-2" to="/login">Login</Link>
-                            <Link className="btn btn-danger m-2 p-2" to="/register">Register</Link>
+                            <Link className="btn btn-dark m-2 p-2" to="/">Home</Link>
+                            <Link className="btn btn-dark m-2 p-2" to="/login">Login</Link>
+                            <Link className="btn btn-dark m-2 p-2" to="/register">Register</Link>
                         </div>
                 }
             </nav>

@@ -19,7 +19,7 @@ const SessionDetailsView = () => {
 
     return (
         <div className="container">
-            <GameDetails game={game}/>
+            <GameDetails game={game} fetchGame={fetchData}/>
         </div>
     );
 };

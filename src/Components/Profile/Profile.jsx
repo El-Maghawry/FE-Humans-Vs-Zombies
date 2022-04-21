@@ -31,7 +31,7 @@ class Profile extends  Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <h2>Profile Information</h2>
                 <table>
                     <tr>
