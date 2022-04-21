@@ -1,83 +1,62 @@
-import React, {useRef, useState} from "react";
+
 import {useNavigate} from "react-router-dom";
-import {get} from "../../services/rest-api/apiFetchServiceWrapper";
-// import Select from 'react-select'
 
-const Profile = () => {
-    const router = useNavigate();
+import {getUserByUsername} from "../../services/rest-api/userService";
+import {Component} from "react";
 
 
-    let userdata = JSON.parse(localStorage.getItem('<USER>'));
 
-    // debugger
-    // let firstnameRef = useRef();
-    // let lastnameRef = useRef();
-    // let emailRef = useRef();
-    // let usernameRef = useRef();
+class Profile extends  Component {
+     username = JSON.parse(localStorage.getItem('<USER>')).username;
 
-    // firstnameRef.current.value = userdata.firstname
+    // router = useNavigate();
 
-    const registerSubmit = (e) => {
-        e.preventDefault();
-        // getRefs();
+    constructor(props) {
+        super(props);
+        this.state = {userdata: {}};
+        // this.userdata = getUserByUsername(this.username)
+    }
 
-        // if (!firstnameValue ||
-        //     !lastnameValue ||
-        //     !emailValue ||
-        //     !usernameValue ||
-        //     !passwordValue ||
-        //     !passwordReValue) {
-        //     alert("fill all fields");
-        //     return;
-        // }
 
-        // if (passwordValue.length < 3) {
-        //     alert("the password should have more than 3 characters");
-        //     return;
-        // }
-        //
-        // if (passwordValue !== passwordReValue) {
-        //     alert("passwords don't match");
-        //     return;
-        // }
-        //
-        // console.log('all fields are filled');
-    };
 
-    // function getRefs() {
-    //     firstnameValue = firstnameRef.current.value;
-    //     lastnameValue = lastnameRef.current.value;
-    //     emailValue = emailRef.current.value;
-    //     usernameValue = usernameRef.current.value;
-    //     passwordValue = passwordRef.current.value;
-    //     passwordReValue = passwordReRef.current.value;
-    // }
 
-    return (
-        <div>
-            <h2>Profile Information</h2>
-            <table>
-                <tr>
-                    <td>First Name</td>
-                    <td>{userdata.firstname}</td>
-                </tr>
-                <tr>
-                    <td>Last Name</td>
-                    <td>{userdata.lastname}</td>
-                </tr>
-                <tr>
-                    <td>E-Mail</td>
-                    <td>{userdata.email}</td>
-                </tr>
-                <tr>
-                    <td>Username</td>
-                    <td >{userdata.username}</td>
-                </tr>
+    async componentDidMount() {
 
-            </table>
+        this.userdata = await getUserByUsername(this.username)
+        console.log("state.userdata: " + this.userdata)
+        console.table(this.userdata)
+        this.forceUpdate()
 
-        </div>
-    );
+    }
+
+    render() {
+        return (
+            <div>
+                <h2>Profile Information</h2>
+                <table>
+                    <tr>
+                        <td>First Name</td>
+                        <td>{this.userdata?.firstName}</td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td>{this.userdata?.lastName}</td>
+                    </tr>
+                    <tr>
+                        <td>Username</td>
+                        <td>{this.userdata?.username}</td>
+                    </tr>
+                    <tr>
+                        <td>ID</td>
+                        <td>{this.userdata?.id}</td>
+                    </tr>
+                    <tr>
+                        <td>User Type</td>
+                        <td>{this.userdata?.isAdmin ? "Admin" : "Player"}</td>
+                    </tr>
+                </table>
+            </div>
+        )
+    }
 };
-
 export default Profile;
