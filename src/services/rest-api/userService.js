@@ -1,6 +1,8 @@
 import {get, post, put} from "./apiFetchServiceWrapper";
 
-async function createUser() {
+async function createUser()
+{
+    debugger
     return await post('/user');
 }
 
@@ -12,4 +14,8 @@ async function updateUser(userId, userData) {
     return await put(`/user/${userId}`, userData);
 }
 
-export {createUser, getAllUsers, updateUser};
+async function getUser(userId) {
+    return await get(`/user/${userId}`);
+}
+
+export {createUser, getAllUsers, updateUser, getUser};

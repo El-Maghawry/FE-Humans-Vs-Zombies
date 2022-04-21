@@ -13,6 +13,7 @@ async function getAllGames() {
 }
 
 async function getGameById(gameId) {
+    debugger
     return await get(`/game/${gameId}`);
 }
 

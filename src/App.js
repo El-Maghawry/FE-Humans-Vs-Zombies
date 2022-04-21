@@ -29,6 +29,7 @@ import {
 } from "./services/rest-api/killService";
 import ConfigSession from "./Components/views/ConfigSession";
 import SessionDetailsView from "./Components/views/SessionDetailsView";
+import Profile from "./Components/Profile/Profile";
 
 
 function App() {
@@ -178,6 +179,7 @@ function App() {
                 <Route path="/game/:id/player" element={<PlayerView/>}/>
                 <Route path="/register" element={<RegisterView/>}/>
                 <Route path="*" element={<NotFoundView/>}/>
+                <Route path="/profile" element={<Profile/>}/>
             </Routes>
             <br/><br/><br/><br/><br/><hr/>
 
