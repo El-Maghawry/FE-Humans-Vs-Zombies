@@ -3,6 +3,8 @@ import {useNavigate} from "react-router-dom";
 import {deleteGame, getGameById, updateGame} from '../../services/rest-api/gameService';
 import {updatePlayerInGame} from "../../services/rest-api/playerService";
 import {GAME_STATE_TYPES} from "../../services/rest-api/gameStateTypes";
+import Map from "../Map/Map";
+import {createKillInGame} from "../../services/rest-api/killService";
 
 const GameDetails = (props) => {
 
@@ -52,8 +54,6 @@ const GameDetails = (props) => {
             gameState: gameState
         };
 
-        console.log(title);
-        console.log(gameState);
         await updateGame(props.game.id, gameChanges);
         props.fetchGame();
         setTitle("");
@@ -180,13 +180,42 @@ const GameDetails = (props) => {
                     </div>
                 }
 
+                <div>
+                    {
+                        killForm &&
+                        <div className="container mt-2">
+                            <h3>Kill update</h3>
+                            <form>
+                                <div className="form-grout mb-2">
+                                    <label className="form-label">Victim's Bite code:</label>
+                                    <input
+                                        type="text"
+                                        name="bitecode" className="form-control"
+                                        value={biteCode}
+                                        onChange={(e) => setBiteCode(e.target.value)}
+                                    />
+                                </div>
+
+                                <div className="form-grout mb-2">
+                                    <label className="form-label">Killer ID:</label>
+                                    <input
+                                        type="number"
+                                        name="killerId" className="form-control"
+                                        value={killerId}
+                                        onChange={(e) => setKillerId(e.target.value)}
+                                    />
+                                </div>
+
+                                <button className="btn btn-secondary m-1" onClick={(e) => createKill(e)}>Save</button>
+                            </form>
+                        </div>
+                    }
+                </div>
+
                 <div className="d-flex flex-row p-1 justify-content-around">
                     {/*this should go in its own component*/}
                     <div className="map-box p-6 border-1 m-1">
-                        <h4>Map</h4>
-                        <div>
-                            <p>Map from Google api goes here</p>
-                        </div>
+                        <Map username={userData.username}/>
                     </div>
                     {/*this should go in its own component*/}
                     <div className="chat-box p-6 border-1 m-1">
