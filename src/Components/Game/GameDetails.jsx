@@ -5,6 +5,7 @@ import {updatePlayerInGame} from "../../services/rest-api/playerService";
 import {GAME_STATE_TYPES} from "../../services/rest-api/gameStateTypes";
 import Map from "../Map/Map";
 import {createKillInGame} from "../../services/rest-api/killService";
+import ChatRoom from "../ChatRoom/ChatRoom";
 
 const GameDetails = (props) => {
 
@@ -219,10 +220,7 @@ const GameDetails = (props) => {
                     </div>
                     {/*this should go in its own component*/}
                     <div className="chat-box p-6 border-1 m-1">
-                        <h4>Chat</h4>
-                        <div>
-                            <p>Chat content goes here</p>
-                        </div>
+                        <ChatRoom username={userData.username}/>
                     </div>
                 </div>
             </div>
