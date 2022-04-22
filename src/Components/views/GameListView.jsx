@@ -26,7 +26,7 @@ const GameListView = () => {
                 </thead>
                 <tbody>
                 {
-                    games.map(game => <GameListItem game={game} key={game.gameId}/>)
+                    games.map(game => <GameListItem game={game} fetchData={fetchData} key={game.gameId}/>)
                 }
                 </tbody>
             </table>

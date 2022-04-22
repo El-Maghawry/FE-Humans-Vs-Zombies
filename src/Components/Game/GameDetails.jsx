@@ -6,12 +6,16 @@ import {GAME_STATE_TYPES} from "../../services/rest-api/gameStateTypes";
 import Map from "../Map/Map";
 import {createKillInGame} from "../../services/rest-api/killService";
 import ChatRoom from "../ChatRoom/ChatRoom";
+import Collapsable from "../Collapsable/Collapsable";
 
 const GameDetails = (props) => {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [gameState, setGameState] = useState("");
+    const [biteCode, setBiteCode] = useState("");
+    const [killerId, setKillerId] = useState("");
+    const [showKillForm, setShowKillForm] = useState(false);
 
     let gameId = props.game.id;
 
@@ -105,22 +109,41 @@ const GameDetails = (props) => {
         }
     }
 
+    const killForm = () => {
+        setShowKillForm(true);
+    };
+
+    const createKill = async (e) => {
+        e.preventDefault();
+
+        let killData = await createKillInGame(gameId, {
+                victimBiteCode: biteCode,
+                killer_id: killerId
+            }
+        );
+
+        setShowKillForm(false);
+        console.log(killData);
+    };
+
     return (
         <>
-            <div>
-                <h2>{props.game.name}</h2>
-                <p>Game state: {props.game.state}</p>
-                <p>Description: {props.game.description}</p>
-                <br/>
-                <div>{renderPlayers()}</div>
+            <div className="game-details container">
+                <div className={"header-game-details row m-3"}>
+                    <h2 className={"col"}>{props.game.name}</h2>
+                    <p className={"col"}>Game state: {props.game.state}</p>
+                    <Collapsable label="View Players" className={"col"}><div>{renderPlayers()}</div></Collapsable>
+                    <p className={"row"}>Description: {props.game.description}</p>
+                </div>
                 <br/>
                 <div>
             <span>
                 {
                     isUserAdmin &&
-                    <div>
+                    <div className="mb-3">
                         <button className="btn btn-secondary m-1" onClick={gameUpdateForm}>Edit</button>
                         <button className="btn btn-success m-1" onClick={startGame}>Start Game</button>
+                        <button className="btn btn-outline-danger m-1" onClick={killForm}>Kill</button>
                         <button className="btn btn-danger m-1" onClick={delGame}>Delete Game</button>
                     </div>
                 }
@@ -183,7 +206,7 @@ const GameDetails = (props) => {
 
                 <div>
                     {
-                        killForm &&
+                        showKillForm &&
                         <div className="container mt-2">
                             <h3>Kill update</h3>
                             <form>
