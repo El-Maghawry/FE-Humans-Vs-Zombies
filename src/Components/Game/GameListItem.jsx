@@ -34,22 +34,35 @@ const GameListItem = (props) => {
         navigate(`/game/${gameId}`);
     };
 
-    console.log(props.game);
+    /**
+     * @param {array} players
+     */
+    function checkIfPlayerIsPresent(players) {
+        let isFound = false;
+        players.forEach(e => {
+            if (e.username === userData.username) {
+                isFound = true;
+            }
+        });
+
+        return isFound
+    }
+
     return (
-        <tr>
+        <tr className="tab-row">
             <td>{props.game.name}</td>
             <td>{props.game.state}</td>
             <td>{props.game.players.length}</td>
             {
                 userData &&
-                    <td>
-                        {
-                            props.game.state === "REGISTRATION" &&
-                                <button className="btn btn-success m-1" onClick={() => joinGame(props.game.id)}>Join</button>
-                        }
-                        <button className="btn btn-secondary m-1" onClick={() => displayGameDetails(props.game.id)}>Details
-                        </button>
-                    </td>
+                <td>
+                    {
+                        props.game.state === "REGISTRATION" && !checkIfPlayerIsPresent(props.game.players) &&
+                        < button className="btn btn-success m-1" onClick={() => joinGame(props.game.id)}>Join</button>
+                    }
+                    <button className="btn btn-secondary m-1" onClick={() => displayGameDetails(props.game.id)}>Details
+                    </button>
+                </td>
             }
 
         </tr>

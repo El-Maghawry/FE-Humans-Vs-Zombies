@@ -4,9 +4,10 @@ import {deleteGame, getGameById, updateGame} from '../../services/rest-api/gameS
 import {updatePlayerInGame} from "../../services/rest-api/playerService";
 import {GAME_STATE_TYPES} from "../../services/rest-api/gameStateTypes";
 import Map from "../Map/Map";
-import {createKillInGame} from "../../services/rest-api/killService";
+import {createKillInGame, getAllKillsInGame} from "../../services/rest-api/killService";
 import ChatRoom from "../ChatRoom/ChatRoom";
 import Collapsable from "../Collapsable/Collapsable";
+import moment from "moment";
 
 const GameDetails = (props) => {
 
@@ -15,6 +16,7 @@ const GameDetails = (props) => {
     const [gameState, setGameState] = useState("");
     const [biteCode, setBiteCode] = useState("");
     const [killerId, setKillerId] = useState("");
+    const [kills, setKills] = useState([]);
     const [showKillForm, setShowKillForm] = useState(false);
 
     let gameId = props.game.id;
@@ -27,6 +29,8 @@ const GameDetails = (props) => {
     if (userData) {
         isUserAdmin = userData.isAdmin;
     }
+
+
 
     const renderPlayers = () => {
         if (props.game.players) {
@@ -126,16 +130,64 @@ const GameDetails = (props) => {
         console.log(killData);
     };
 
+    // function showKills(){
+    //     console.log(props.kills);
+    // }
+
+    /*
+   [
+    {
+        "killerUsername": "petar",
+        "victimUsername": "philipp",
+        "timeOfDeath": 1650622415.596684000
+    },
+    {
+        "killerUsername": "jan",
+        "victimUsername": "ivan",
+        "timeOfDeath": 1650622569.526436000
+    }
+]
+     */
+
+    const showKills = () => {
+        if (props.kills) {
+            return (
+                props.kills.map(kill =>
+                <div key={""}>
+                    <p>Killer: {kill.killerUsername}🧟‍♂️ </p>
+                    <p>ToD: {new Date(kill.timeOfDeath).toLocaleString('de-DE')}</p>
+                    <p>victim: {kill.victimUsername}💀</p>
+                    <hr/>
+                </div>
+                )
+            )
+        }
+    };
+
     return (
         <>
             <div className="game-details container">
-                <div className={"header-game-details row m-3"}>
-                    <h2 className={"col"}>{props.game.name}</h2>
-                    <p className={"col"}>Game state: {props.game.state}</p>
-                    <Collapsable label="View Players" className={"col"}><div>{renderPlayers()}</div></Collapsable>
-                    <p className={"row"}>Description: {props.game.description}</p>
+                <h2>{props.game.name}</h2>
+
+                <div className="header-game-details d-flex flex-row justify-content-between m-2">
+                    <div className="col-4 d-flex flex-column align-items-start">
+                        <h5>Game state:</h5>
+                        <p>{props.game.state}</p>
+                        <h6>Description:</h6>
+                        <p>{props.game.description}</p>
+                    </div>
+
+                    <div className={"col-3"}>
+                        <Collapsable label="View Players" ><div>{renderPlayers()}</div></Collapsable>
+                    </div>
+
+                    <div className={"col-5"}>
+                        <Collapsable label="View Kills" ><div>{showKills()}</div></Collapsable>
+                    </div>
                 </div>
+
                 <br/>
+
                 <div>
             <span>
                 {
@@ -236,13 +288,13 @@ const GameDetails = (props) => {
                     }
                 </div>
 
-                <div className="d-flex flex-row p-1 justify-content-around">
+                <div className="map-chat d-flex flex-row p-1 justify-content-around align-items-center">
                     {/*this should go in its own component*/}
                     <div className="map-box p-6 border-1 m-1">
                         <Map username={userData.username}/>
                     </div>
                     {/*this should go in its own component*/}
-                    <div className="chat-box p-6 border-1 m-1">
+                    <div>
                         <ChatRoom username={userData.username}/>
                     </div>
                 </div>

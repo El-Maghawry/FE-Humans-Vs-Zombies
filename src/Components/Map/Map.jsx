@@ -67,7 +67,9 @@ function Map(props) {
                 setLng(lngLat.lng);
             });
 
-            marker.setPopup(popup).togglePopup();
+            marker.setPopup(popup)
+                .togglePopup()
+
         };
 
         addMarker();
@@ -78,8 +80,8 @@ function Map(props) {
     return (
         <>
             {
-                map && <div className="app-map rounded">
-                    <div ref={mapElement} className="map rounded"/>
+                map && <div className="app-map">
+                    <div ref={mapElement} className="map"/>
                     {/*<div className="serch-bar">*/}
                     {/*    <h2>Enter Longitude</h2>*/}
                     {/*    <input*/}

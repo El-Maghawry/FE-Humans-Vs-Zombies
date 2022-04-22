@@ -40,7 +40,6 @@ code {
 }
 .navbar a:hover {
   color: red;
-
 }
 
 .navbar button {
@@ -69,16 +68,27 @@ code {
   border:2px solid gray;
   -webkit-box-shadow: -2px 0px 15px -2px rgba(0,0,0,0.48);
   box-shadow: -2px 0px 15px -2px rgba(0,0,0,0.48);
+  border-radius: 5px;
+  margin-left: 6px;
 }
 
 .marker {
   background-image: url('https://i.imgur.com/oz3r3Wq.png');
   background-size: cover;
-  width:22px;
-  height:22px;
+  width:32px;
+  height:32px;
   background-color: yellow;
-  border-radius: 11px;
+  border-radius: 16px;
   border: solid 3px darkslategray;
+}
+
+.mapboxgl-popup {
+  width: 100px;
+}
+
+.table {
+  background-color: lightgrey;
+  border: 3px solid #282c34;
 }
 
 .game-details {
@@ -90,3 +100,12 @@ code {
   -webkit-box-shadow: -2px 5px 25px -2px rgba(0,0,0,0.66);
   box-shadow: -2px 5px 25px -2px rgba(0,0,0,0.66);
 }
+
+.header-game-details {
+  background-color: lightgrey;
+  margin: 0.5rem;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid #282c34;
+}
+
