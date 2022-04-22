@@ -137,14 +137,11 @@ debugger
                 <div className="chat-box">
                     <div className="member-list">
                         <ul>
-                            <li onClick={() => {
-                                setTab("CHATROOM");
-                            }} className={`member ${tab === "CHATROOM" && "active"}`}>Chatroom
-                            </li>
+                            <li onClick={()=>{setTab("CHATROOM")}} className={`btn btn-success member ${tab==="CHATROOM" && "active"}`}>Chatroom</li>
                             {[...privateChats.keys()].map((name, index) => (
                                 <li onClick={() => {
                                     setTab(name);
-                                }} className={`member ${tab === name && "active"}`} key={index}>{name}</li>
+                                }} className={`btn btn-secondary member ${tab === name && "active"}`} key={index}>{name}</li>
                             ))}
                         </ul>
                     </div>
