@@ -14,16 +14,17 @@ class Profile extends Component {
 
     async componentDidMount() {
         this.userdata = await getUserByUsername(this.username)
+        this.gamedata = await getUserByUsername(this.username)
         console.log("state.userdata: " + this.userdata)
         console.table(this.userdata)
         this.forceUpdate()
     }
 
     render() {
-        return (
-            <>
-                <h2>User</h2>
-                <table class="table table-striped">
+        return (<>
+            <details>
+                <summary>User</summary>
+                <table className="table table-striped">
                     <thead>
                     <tr>
                         {/*<th scope="col">#</th>*/}
@@ -37,44 +38,70 @@ class Profile extends Component {
                     <tbody>
                     <tr>
                         {/*<th scope="row">1</th>*/}
-                        <td>{this.userdata?.firstName}</td>
-                        <td>{this.userdata?.lastName}</td>
+                        <td>{this.userdata?.firstname}</td>
+                        <td>{this.userdata?.lastname}</td>
                         <td>{this.userdata?.username}</td>
-                        <td>{this.userdata?.id}</td>
-                        <td>{this.userdata?.isAdmin ? "Admin" : "Player"}</td>
+                        <td>{this.userdata?.userId}</td>
+                        <td>{this.userdata?.admin ? "Admin" : "Player"}</td>
                     </tr>
                     </tbody>
                 </table>
-                {
-                    this.userdata?.player !== null &&
-                    (
-                        <>
-                    <h2>Player</h2>
-                <table className="table table-striped">
-                    <thead>
-                    <tr>
-                        {/*<th scope="col">#</th>*/}
-                        <th scope="col">Player ID</th>
-                        <th scope="col">Human or Zombie?</th>
-                        <th scope="col">Bite Code</th>
-                        <th scope="col">Kills</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        {/*<th scope="row">1</th>*/}
-                        <td>{this.userdata?.player?.id}</td>
-                        <td>{this.userdata?.player?.isHuman ? "Human" : "Zombie"}</td>
-                        <td>{this.userdata?.player?.biteCode}</td>
-                        <td>{this.userdata?.player?.kills}</td>
-                    </tr>
-                    </tbody>
-                </table>
-                        </>
-                    )
-                }
-            </>
-        )
+            </details>
+            {/*<h2>User</h2>*/}
+
+            {this.userdata?.player !== null && (<>
+                <details><summary>Player</summary>
+                    <table className="table table-striped">
+                        <thead>
+                        <tr>
+                            {/*<th scope="col">#</th>*/}
+                            <th scope="col">Player ID</th>
+                            <th scope="col">Human or Zombie?</th>
+                            <th scope="col">Bite Code</th>
+                            <th scope="col">Kills</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            {/*<th scope="row">1</th>*/}
+                            <td>{this.userdata?.playerId}</td>
+                            <td>{this.userdata?.human ? "Human" : "Zombie"}</td>
+                            <td>{this.userdata?.biteCode}</td>
+                            <td>{this.userdata?.kills}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </details>
+                {/*<h2>Player</h2>*/}
+
+                <details><summary>Game</summary>
+                    <table className="table table-striped">
+                        <thead>
+                        <tr>
+                            {/*<th scope="col">#</th>*/}
+                            <th scope="col">Game Name</th>
+                            <th scope="col">Game ID</th>
+                            <th scope="col">Game State</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            {/*<th scope="row">1</th>*/}
+                            <td>{this.userdata?.gameName}</td>
+                            <td>{this.userdata?.gameId}</td>
+                            <td>{this.userdata?.gameState}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </details>
+
+                {/*<h2>Game</h2>*/}
+
+
+
+            </>)}
+        </>)
         // return (
         //     <div className="container">
         //         <h2>Profile Information</h2>
