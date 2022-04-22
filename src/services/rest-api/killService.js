@@ -1,4 +1,4 @@
-import {get, post, del, put} from "./apiFetchServiceWrapper";
+import {get, post, del} from "./apiFetchServiceWrapper";
 
 async function getAllKillsInGame(gameId) {
     return await get(`/game/${gameId}/kill`);
