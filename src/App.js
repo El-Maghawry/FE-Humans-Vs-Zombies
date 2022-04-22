@@ -8,7 +8,6 @@ import {createGame, deleteGame, getAllGames, getGameById, updateGame} from "./se
 import {createUserInApi, getAllUsers, getUserByUsername, updateUser} from "./services/rest-api/userService";
 import {GAME_STATE_TYPES} from "./services/rest-api/gameStateTypes";
 
-
 import Navbar from "./Components/Navbar/Navbar";
 import NotFoundView from './Components/views/NotFoundView';
 import LoginView from './Components/views/LoginView';
@@ -30,6 +29,7 @@ import {
 import ConfigSession from "./Components/views/ConfigSession";
 import SessionDetailsView from "./Components/views/SessionDetailsView";
 import Profile from "./Components/Profile/Profile";
+import Collapsible from "./Components/Collapsable/Collapsable";
 
 
 function App() {
@@ -181,7 +181,8 @@ function App() {
                 <Route path="/profile" element={<Profile/>}/>
             </Routes>
             <br/><br/><br/><br/><br/><hr/>
-                <h3>Testing Area</h3>
+            <Collapsible label='Testing Area'>
+
             <br/>
                 <button onClick={loginFeat}> login</button>
                 <button onClick={getAdminAccessToken}> token</button>
@@ -226,6 +227,7 @@ function App() {
 
                  <hr/>
                  <button onClick={getUser}>get user by username</button>
+        </Collapsible>
         </div>
     );
 }

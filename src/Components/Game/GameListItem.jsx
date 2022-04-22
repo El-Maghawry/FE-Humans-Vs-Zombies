@@ -16,22 +16,6 @@ const GameListItem = (props) => {
         }
 
         let playerType;
-
-        // let gamePlayers = game.players;
-        //
-        // let zombiesCount = 0;
-        // let humansCount = 0;
-
-        // gamePlayers.forEach(p => setPlayerType(0.1, p));
-
-        // let zombieRatio = (zombiesCount / humansCount) * 100;
-        //
-        // zombiesCount === humansCount
-        //     ? playerType = 'human'
-        //     : zombieRatio > 10
-        //         ? playerType = 'human'
-        //         : playerType = 'zombie';
-
         playerType = getRandomPlayerType();
 
         const playerData = await createPlayer(gameId, {
@@ -39,7 +23,7 @@ const GameListItem = (props) => {
             zombie: playerType === 'zombie'
         });
 
-        console.log(playerData);
+        props.fetchData();
     };
 
     function getRandomPlayerType(probability = 0.2) {

@@ -17,7 +17,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="navbar mt-3 mb-5 bg-warning rounded">
+            <nav className="navbar mt-3 mb-5 rounded">
                 <h1 className="px-3"> 🥷🏿 Humans Vs. Zombies 🧟‍♂️ </h1>
                 {
                     userData ?

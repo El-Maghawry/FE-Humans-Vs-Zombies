@@ -78,8 +78,8 @@ function Map(props) {
     return (
         <>
             {
-                map && <div className="app-map">
-                    <div ref={mapElement} className="map"/>
+                map && <div className="app-map rounded">
+                    <div ref={mapElement} className="map rounded"/>
                     {/*<div className="serch-bar">*/}
                     {/*    <h2>Enter Longitude</h2>*/}
                     {/*    <input*/}
