@@ -33,7 +33,7 @@ const Navbar = () => {
                                     <button className="btn btn-dark m-2 p-2" onClick={onNewGameButton}>
                                         New Game
                                     </button>
-                                    : <Link className="btn btn-dark m-2 p-2" to="/">Home</Link>
+                                    : <></>
                             }
                         </div>
                         :
