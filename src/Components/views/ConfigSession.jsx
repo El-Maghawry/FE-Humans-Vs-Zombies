@@ -28,7 +28,6 @@ const ConfigSession = () => {
                         name="title"
                         className="form-control"
                         ref={titleRef}
-
                     />
                     <br/>
                     <textarea

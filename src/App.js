@@ -1,8 +1,18 @@
 import './App.css';
 
-import {Routes, Route} from 'react-router-dom';
+import {
+    Routes,
+    Route,
+    Link,
+    useNavigate,
+    useLocation,
+    Navigate,
+    Outlet,
+
+} from 'react-router-dom';
+
 import {getAdminAccessToken, login, refreshUserAccessToken, registerNewUser} from "./services/keycloak/authService";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {UserContext} from "./store/UserContext";
 import {createGame, deleteGame, getAllGames, getGameById, updateGame} from "./services/rest-api/gameService";
 import {createUserInApi, getAllUsers, getUserByUsername, updateUser} from "./services/rest-api/userService";
@@ -30,6 +40,7 @@ import ConfigSession from "./Components/views/ConfigSession";
 import SessionDetailsView from "./Components/views/SessionDetailsView";
 import Profile from "./Components/Profile/Profile";
 import Collapsible from "./Components/Collapsable/Collapsable";
+import {RequireAuth} from "./guards/auth";
 
 
 function App() {
@@ -92,22 +103,22 @@ function App() {
         console.log(data);
     }
 
-    async function testUpdateGame(){
-        let data = await updateGame(5,{gameState: GAME_STATE_TYPES.in_progress});
+    async function testUpdateGame() {
+        let data = await updateGame(5, {gameState: GAME_STATE_TYPES.in_progress});
         console.log(data);
     }
 
-    async function getGameByIdTest(){
+    async function getGameByIdTest() {
         const data = await getGameById(2);
         console.log(data);
     }
 
-    async function deleteGameTest(){
-       console.log( await deleteGame(2));
+    async function deleteGameTest() {
+        console.log(await deleteGame(2));
     }
 
-    async function registerPlayerForGameTest(){
-        const data = await createPlayer(2,{
+    async function registerPlayerForGameTest() {
+        const data = await createPlayer(2, {
             "human": true,
             "zombie": false
         });
@@ -157,7 +168,7 @@ function App() {
         console.log(data);
     }
 
-    async function getUser(){
+    async function getUser() {
         const data = await getUserByUsername('natasha');
         console.log(data);
     }
@@ -165,25 +176,28 @@ function App() {
     return (
         <div className="App">
 
-                <Navbar/>
+            <Navbar/>
 
             <Routes>
                 <Route path="/" element={<GameListView/>}/>
                 <Route path="/login" element={<LoginView/>}/>
-
-                <Route path="/configsession" element={<ConfigSession/>}/>
-
-                <Route path="/game/:id" element={<SessionDetailsView/>}/>
-
-                <Route path="/game/:id/player" element={<PlayerView/>}/>
                 <Route path="/register" element={<RegisterView/>}/>
                 <Route path="*" element={<NotFoundView/>}/>
-                <Route path="/profile" element={<Profile/>}/>
-            </Routes>
-            <br/><br/><br/><br/><br/><hr/>
-            <Collapsible label='Testing Area'>
 
-            <br/>
+                <Route element={<RequireAuth/>}>
+                    <Route path="/configsession" element={<ConfigSession/>}/>
+                    <Route path="/game/:id" element={<SessionDetailsView/>}/>
+                    <Route path="/game/:id/player" element={<PlayerView/>}/>
+                    <Route path="/profile" element={<Profile/>}/>
+                </Route>
+
+            </Routes>
+
+            <br/><br/><br/><br/><br/>
+            <hr/>
+            <Collapsible label="Testing Area">
+
+                <br/>
                 <button onClick={loginFeat}> login</button>
                 <button onClick={getAdminAccessToken}> token</button>
                 <button onClick={register}>register</button>
@@ -225,9 +239,9 @@ function App() {
                 <hr/>
                 <button onClick={delKill}>delKill</button>
 
-                 <hr/>
-                 <button onClick={getUser}>get user by username</button>
-        </Collapsible>
+                <hr/>
+                <button onClick={getUser}>get user by username</button>
+            </Collapsible>
         </div>
     );
 }

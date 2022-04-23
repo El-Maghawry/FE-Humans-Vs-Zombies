@@ -1,23 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    
-    <title>🥷🏿 Humans Vs. Zombies 🧟‍♂️ </title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    
-  </body>
+<head>
+  <meta charset="utf-8"/>
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="theme-color" content="#000000"/>
+  <meta
+          name="description"
+          content="Web site created using create-react-app"
+  />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png"/>
+
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json"/>
+
+  <title>🥷🏿 Humans Vs. Zombies 🧟‍♂️ </title>
+  <style>
+    .loader {
+      margin: 150px auto 0;
+      border: 16px solid #124057;
+      border-top: 16px solid #94BF6E;
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      animation: spin 1.5s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<div id="root">
+  <div class="loader">
+  </div>
+</div>
+
+</body>
 </html>
