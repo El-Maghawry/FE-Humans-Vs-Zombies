@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# Case Period: Humans vs. Zombies
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This application implements a management application for the game humans vs. Zombies
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+## Storage
+The application data are stored in a postgres database. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Frontend 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The Frontend is implemented in react and enables users to manage all the game information.
+It stores and fetches all the data in the postgres database using the REST API in the backend.
+You can find the code <a href="https://gitlab.com/gitlab-experis-petar_phil/hvz-game-ginal_case_frontend">here</a>.
+The application is deployed <a href="">here //Todo insert Link</a>.
+Here you can see how the user interface looks:
 
-### `npm test`
+<details>
+  <summary>home page</summary>
+  <img src="public/screenshots/HomePage.jpg">
+</details>
+<details>
+  <summary>profile page</summary>
+  <img src="public/screenshots/ProfilePage.jpg">
+</details>
+<details>
+  <summary>new game</summary>
+  <img src="public/screenshots/NewGame.jpg">
+</details>
+<details>
+  <summary>game details as player</summary>
+  <img src="public/screenshots/GameDetailsAsPlayer.jpg">
+</details>
+<details>
+  <summary>game details as admin</summary>
+  <img src="public/screenshots/GameDetailsAsAdmin.jpg">
+</details>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Backend
+## Security
 
-### `npm run build`
+## Usage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The application is deployed at: https://obscure-woodland-51059.herokuapp.com/
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+If you want to run it yourself, you simpy need to clone the repo and run</br> ```npm install; npm run start```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Maintainer
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+[Petar Dimitrov]
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+[Philipp Loibl]
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+[Igor Figueiredo]
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+[Mohammed El Maghawry]
 
-## Learn More
+## License
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+[MIT]
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[Petar Dimitrov]: https://github.com/PetarDimitrov91
 
-### Code Splitting
+[Philipp Loibl]: https://github.com/Loibl33
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+[Igor Figueiredo]: https://gitlab.com/Igor-GF
 
-### Analyzing the Bundle Size
+[Mohammed El Maghawry]: https://gitlab.com/El-Maghawry
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+[MIT]: https://choosealicense.com/licenses/mit/
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
