@@ -130,25 +130,6 @@ const GameDetails = (props) => {
         console.log(killData);
     };
 
-    // function showKills(){
-    //     console.log(props.kills);
-    // }
-
-    /*
-   [
-    {
-        "killerUsername": "petar",
-        "victimUsername": "philipp",
-        "timeOfDeath": 1650622415.596684000
-    },
-    {
-        "killerUsername": "jan",
-        "victimUsername": "ivan",
-        "timeOfDeath": 1650622569.526436000
-    }
-]
-     */
-
     const showKills = () => {
         if (props.kills) {
             return (

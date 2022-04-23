@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavLink, useNavigate} from 'react-router-dom';
 import {getGameById} from "../../services/rest-api/gameService";
 import {createPlayer} from "../../services/rest-api/playerService";
 
 const GameListItem = (props) => {
-    let userData = JSON.parse(localStorage.getItem('<USER>'));
+     let userData = JSON.parse(localStorage.getItem('<USER>'));
 
     const navigate = useNavigate();
 
@@ -42,10 +42,13 @@ const GameListItem = (props) => {
         players.forEach(e => {
             if (e.username === userData.username) {
                 isFound = true;
+                localStorage.removeItem('<USER>');
+                userData.joinedGame = e.gameId;
+                localStorage.setItem('<USER>', JSON.stringify(userData));
             }
         });
 
-        return isFound
+        return isFound;
     }
 
     return (
@@ -57,8 +60,19 @@ const GameListItem = (props) => {
                 userData &&
                 <td>
                     {
-                        props.game.state === "REGISTRATION" && !checkIfPlayerIsPresent(props.game.players) &&
-                        < button className="btn btn-success m-1" onClick={() => joinGame(props.game.id)}>Join</button>
+                        props.game.state === "REGISTRATION" && !checkIfPlayerIsPresent(props.game.players)
+                            ?
+                            !userData.joinedGame
+                                ?
+                                <button className="btn btn-success m-1"
+                                        onClick={() => joinGame(props.game.id)}>Join</button>
+                                :
+                                userData.joinedGame === props.game.id ?
+                                    < button disabled className="btn btn-success m-1">Joined</button>
+                                    : ''
+                            :
+                            props.game.state === "REGISTRATION" &&
+                            < button disabled className="btn btn-success m-1">Joined</button>
                     }
                     <button className="btn btn-secondary m-1" onClick={() => displayGameDetails(props.game.id)}>Details
                     </button>
