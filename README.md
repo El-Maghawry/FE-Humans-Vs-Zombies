@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+# Case Period: Humans vs. Zombies
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This application implements a management application for the game humans vs. Zombies
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+## Storage
+The application data are stored in a postgres database. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Frontend 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The Frontend is implemented in react and enables users to manage all the game information.
+It stores and fetches all the data in the postgres database using the REST API in the backend.
+You can find the code <a href="https://gitlab.com/gitlab-experis-petar_phil/hvz-game-ginal_case_frontend">here</a>.
+The application is deployed <a href="">here //Todo insert Link</a>.
+Here you can see how the user interface looks:
 
-### `npm test`
+<details>
+  <summary>home page</summary>
+  <img src="public/screenshots/HomePage.jpg">
+</details>
+<details>
+  <summary>profile page</summary>
+  <img src="public/screenshots/ProfilePage.jpg">
+</details>
+<details>
+  <summary>new game</summary>
+  <img src="public/screenshots/NewGame.jpg">
+</details>
+<details>
+  <summary>game details as player</summary>
+  <img src="public/screenshots/GameDetailsAsPlayer.jpg">
+</details>
+<details>
+  <summary>game details as admin</summary>
+  <img src="public/screenshots/GameDetailsAsAdmin.jpg">
+</details>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Backend
 
-### `npm run build`
+The backend is implemented using spring and provides a REST API for the data stored in the postgres database.
+It is deployed <a href=""> here //todo insert link</a>.
+You can find the code on <a href="">gitlab //todo insert link</a>.
+You can also have a look at the endpoints <a href="public/documents/endpoints.pdf" type=file>here</a>.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Security
+To protect the backend from unauthorized access keycloak is used.
+It is deployed <a href=""> here //todo insert link</a>
 
-### `npm run eject`
+## Usage
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To access the application you can simply use the <a href="">frontend link//todo insert link</a>. 
+If you want to run it locally you can clone the backend and the frontend repo and run ```docker compose up -d``` in the project root directories.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Maintainer
 
-## Learn More
+[Petar Dimitrov]
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+[Philipp Loibl]
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[Igor Figueiredo]
 
-### Code Splitting
+[Mohammed El Maghawry]
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## License
 
-### Analyzing the Bundle Size
+[MIT]
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+[Petar Dimitrov]: https://github.com/PetarDimitrov91
 
-### Making a Progressive Web App
+[Philipp Loibl]: https://github.com/Loibl33
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+[Igor Figueiredo]: https://gitlab.com/Igor-GF
 
-### Advanced Configuration
+[Mohammed El Maghawry]: https://gitlab.com/El-Maghawry
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+[MIT]: https://choosealicense.com/licenses/mit/
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
