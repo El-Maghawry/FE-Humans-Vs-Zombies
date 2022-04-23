@@ -37,6 +37,14 @@ Here you can see how the user interface looks:
 </details>
 
 ## Backend
+
+The backend is implemented using spring and provides a REST API for the data stored in the postgres database.
+It is deployed <a href=""> here //todo insert link</a>.
+You can find the code on <a href="">gitlab //todo insert link</a>.
+You can also have a look at the endpoints <a href="public/documents/endpoints.pdf" type=file>here</a>.
+
+
+
 ## Security
 
 ## Usage
