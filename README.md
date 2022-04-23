@@ -46,12 +46,14 @@ You can also have a look at the endpoints <a href="public/documents/endpoints.pd
 
 
 ## Security
+To protect the backend from unauthorized access keycloak is used.
+It is deployed <a href=""> here //todo insert link</a>
 
 ## Usage
 
-The application is deployed at: https://obscure-woodland-51059.herokuapp.com/
+To access the application you can simply use the <a href="">frontend link//todo insert link</a>. 
+If you want to run it locally you can clone the backend and the frontend repo and run ```docker compose up -d``` in the project root directories.
 
-If you want to run it yourself, you simpy need to clone the repo and run</br> ```npm install; npm run start```
 
 
 ## Maintainer
