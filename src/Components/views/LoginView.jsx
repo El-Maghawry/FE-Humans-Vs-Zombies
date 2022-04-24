@@ -1,27 +1,30 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {login} from "../../services/keycloak/authService";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginView = () => {
-
     const router = useNavigate();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const loginSubmit = async (e) => {
+    async function loginSubmit(e) {
         e.preventDefault();
-
         const data = await login(username, password);
 
         if (data) {
+            toast.success('Login successful');
             router('/');
+        } else {
+            toast.error('username or password don\'t match');
         }
-    };
+    }
 
     return (
         <div>
+            <ToastContainer />
             <form>
                 <div className="form-grout mb-2">
                     <label className="form-label">Username</label>

@@ -12,7 +12,7 @@ import {
 } from 'react-router-dom';
 
 import {getAdminAccessToken, login, refreshUserAccessToken, registerNewUser} from "./services/keycloak/authService";
-import {useContext, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import {UserContext} from "./store/UserContext";
 import {createGame, deleteGame, getAllGames, getGameById, updateGame} from "./services/rest-api/gameService";
 import {createUserInApi, getAllUsers, getUserByUsername, updateUser} from "./services/rest-api/userService";
@@ -41,11 +41,26 @@ import SessionDetailsView from "./Components/views/SessionDetailsView";
 import Profile from "./Components/Profile/Profile";
 import Collapsible from "./Components/Collapsable/Collapsable";
 import {RequireAuth} from "./guards/auth";
+import {ToastContainer} from "react-toastify";
 
 
 function App() {
     const [user, setUser] = useContext(UserContext);
+    const [userInfo, setUserInfo] = useState({});
     let userData;
+    let isUserAdmin = useRef(false);
+
+
+    useEffect(() => {
+        setUserInfo(JSON.parse(localStorage.getItem('<USER>')));
+        userInfo
+            ?
+            userInfo.isAdmin
+                ? isUserAdmin.current = true
+                : isUserAdmin.current = false
+            : isUserAdmin.current = false;
+
+    }, [userInfo, isUserAdmin]);
 
     async function loginFeat() {
         userData = await login('petar', "123321");
@@ -175,7 +190,7 @@ function App() {
 
     return (
         <div className="App">
-
+            <ToastContainer />
             <Navbar/>
 
             <Routes>
@@ -195,53 +210,57 @@ function App() {
 
             <br/><br/><br/><br/><br/>
             <hr/>
-            <Collapsible label="Testing Area">
+            <div className="adminArea">
+                {
+                    isUserAdmin.current &&
 
-                <br/>
-                <button onClick={loginFeat}> login</button>
-                <button onClick={getAdminAccessToken}> token</button>
-                <button onClick={register}>register</button>
-                <button onClick={refreshToken}>refresh token</button>
-                <button onClick={printUserData}> print user data</button>
+                    <Collapsible className="adminArea" label="Testing Area">
+                        <br/>
+                        <button onClick={loginFeat}> login</button>
+                        <button onClick={getAdminAccessToken}> token</button>
+                        <button onClick={register}>register</button>
+                        <button onClick={refreshToken}>refresh token</button>
+                        <button onClick={printUserData}> print user data</button>
 
-                <hr/>
-                <button onClick={createGameTest}>create game</button>
-                <hr/>
-                <button onClick={getGames}>get all games</button>
-                <hr/>
-                <button onClick={createUserInRestApi}>Create User In RestApi</button>
-                <hr/>
-                <button onClick={testUpdateUser}>testUpdateUser</button>
-                <hr/>
-                <button onClick={testGetAllUser}>test Get All User</button>
-                <hr/>
-                <button onClick={testUpdateGame}>testUpdateGame</button>
-                <hr/>
-                <button onClick={getGameByIdTest}>getGameByIdTest</button>
-                <hr/>
-                <button onClick={registerPlayerForGameTest}>registerPlayerForGameTest</button>
-                <hr/>
-                <button onClick={deleteGameTest}>deleteGameTest</button>
-                <hr/>
-                <button onClick={getPlayersInGame}>getAllPlayersInGame</button>
-                <hr/>
-                <button onClick={getPlayer}>getPlayerInGame</button>
-                <hr/>
-                <button onClick={updatePlayerTest}>update player</button>
+                        <hr/>
+                        <button onClick={createGameTest}>create game</button>
+                        <hr/>
+                        <button onClick={getGames}>get all games</button>
+                        <hr/>
+                        <button onClick={createUserInRestApi}>Create User In RestApi</button>
+                        <hr/>
+                        <button onClick={testUpdateUser}>testUpdateUser</button>
+                        <hr/>
+                        <button onClick={testGetAllUser}>test Get All User</button>
+                        <hr/>
+                        <button onClick={testUpdateGame}>testUpdateGame</button>
+                        <hr/>
+                        <button onClick={getGameByIdTest}>getGameByIdTest</button>
+                        <hr/>
+                        <button onClick={registerPlayerForGameTest}>registerPlayerForGameTest</button>
+                        <hr/>
+                        <button onClick={deleteGameTest}>deleteGameTest</button>
+                        <hr/>
+                        <button onClick={getPlayersInGame}>getAllPlayersInGame</button>
+                        <hr/>
+                        <button onClick={getPlayer}>getPlayerInGame</button>
+                        <hr/>
+                        <button onClick={updatePlayerTest}>update player</button>
 
+                        <hr/>
+                        <button onClick={createKillTest}>createKillTest</button>
+                        <hr/>
+                        <button onClick={getAllKillsInGameTest}>getAllKillsInGameTest</button>
+                        <hr/>
+                        <button onClick={getKillInGameTest}>getKillInGameTest</button>
+                        <hr/>
+                        <button onClick={delKill}>delKill</button>
 
-                <hr/>
-                <button onClick={createKillTest}>createKillTest</button>
-                <hr/>
-                <button onClick={getAllKillsInGameTest}>getAllKillsInGameTest</button>
-                <hr/>
-                <button onClick={getKillInGameTest}>getKillInGameTest</button>
-                <hr/>
-                <button onClick={delKill}>delKill</button>
-
-                <hr/>
-                <button onClick={getUser}>get user by username</button>
-            </Collapsible>
+                        <hr/>
+                        <button onClick={getUser}>get user by username</button>
+                    </Collapsible>
+                }
+            </div>
         </div>
     );
 }

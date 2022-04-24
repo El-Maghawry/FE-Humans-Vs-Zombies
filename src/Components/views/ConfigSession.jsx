@@ -13,8 +13,7 @@ const ConfigSession = () => {
         let description = descRef.current.value;
 
        const gameRes = await createGame(title, description);
-
-       console.log(gameRes);
+       router('/');
     };
     return (
         <div>

@@ -1,6 +1,7 @@
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {registerNewUser} from "../../services/keycloak/authService";
+import {toast} from "react-toastify";
 
 const RegisterView = () => {
     const router = useNavigate();
@@ -18,9 +19,12 @@ const RegisterView = () => {
     let passwordReValue = '';
     let passwordReRef = useRef();
 
+
     const registerSubmit = async (e) => {
         e.preventDefault();
         getRefs();
+
+        let hasError = false;
 
         if (!firstnameValue ||
             !lastnameValue ||
@@ -28,22 +32,32 @@ const RegisterView = () => {
             !usernameValue ||
             !passwordValue ||
             !passwordReValue) {
-            alert("fill all fields");
+            toast.error("fill all fields");
             return;
+        }
+
+        const reg = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+        if (!reg.test(emailValue)) {
+            toast.error("Please enter a valid email");
+            hasError = true;
         }
 
         if (passwordValue.length < 3) {
-            alert("the password should have more than 3 characters");
-            return;
+            toast.error("the password should have more than 3 characters");
+            hasError = true;
         }
 
         if (passwordValue !== passwordReValue) {
-            alert("passwords don't match");
+            toast.error("passwords don't match");
+            hasError = true;
+        }
+
+        if (hasError) {
             return;
         }
 
         await registerNewUser(firstnameValue, lastnameValue, emailValue, usernameValue, passwordValue);
-
+        toast.success('Registration Successful');
         router("/");
     };
 
