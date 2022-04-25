@@ -146,6 +146,11 @@ loader
     display: none;
 }
 
+.container{
+    max-width: 1480px;
+}
+
+
 h6 a{
     text-decoration: none;
     color: #18637B;
