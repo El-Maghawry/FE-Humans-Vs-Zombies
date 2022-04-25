@@ -2,9 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {NavLink, useNavigate} from 'react-router-dom';
 import {getGameById} from "../../services/rest-api/gameService";
 import {createPlayer} from "../../services/rest-api/playerService";
+import {toast} from "react-toastify";
 
 const GameListItem = (props) => {
-     let userData = JSON.parse(localStorage.getItem('<USER>'));
+    let userData = JSON.parse(localStorage.getItem('<USER>'));
 
     const navigate = useNavigate();
 
@@ -24,6 +25,7 @@ const GameListItem = (props) => {
         });
 
         props.fetchData();
+        toast.success('You joined for a game with name ' + props.game.name);
     };
 
     function getRandomPlayerType(probability = 0.2) {
@@ -71,8 +73,11 @@ const GameListItem = (props) => {
                                     < button disabled className="btn btn-success m-1">Joined</button>
                                     : ''
                             :
-                            props.game.state === "REGISTRATION" &&
-                            < button disabled className="btn btn-success m-1">Joined</button>
+                            checkIfPlayerIsPresent(props.game.players)
+                                ?
+                                < button disabled className="btn btn-success m-1">Joined</button>
+                                :
+                                ''
                     }
                     <button className="btn btn-secondary m-1" onClick={() => displayGameDetails(props.game.id)}>Details
                     </button>

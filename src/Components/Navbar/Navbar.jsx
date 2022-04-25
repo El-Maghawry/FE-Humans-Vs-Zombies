@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 import {logout} from "../../services/keycloak/authService";
+import {toast} from "react-toastify";
 
 const Navbar = () => {
     const router = useNavigate();
@@ -12,6 +13,7 @@ const Navbar = () => {
 
     function signOut() {
         logout();
+        toast.success('Logout Successful');
         router('/');
     }
 

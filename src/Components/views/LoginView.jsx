@@ -24,7 +24,6 @@ const LoginView = () => {
 
     return (
         <div>
-            <ToastContainer />
             <form>
                 <div className="form-grout mb-2">
                     <label className="form-label">Username</label>
