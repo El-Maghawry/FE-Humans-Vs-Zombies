@@ -43,6 +43,15 @@ import Collapsible from "./Components/Collapsable/Collapsable";
 import {RequireAuth} from "./guards/auth";
 import {ToastContainer} from "react-toastify";
 
+window.onload = () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((e) => {
+            localStorage.setItem('<COORDS>', JSON.stringify({
+                lat: e.coords.latitude, lng: e.coords.longitude
+            }));
+        });
+    }
+};
 
 function App() {
     const [user, setUser] = useContext(UserContext);
@@ -61,6 +70,7 @@ function App() {
             : isUserAdmin.current = false;
 
     }, [userInfo, isUserAdmin]);
+
 
     async function loginFeat() {
         userData = await login('petar', "123321");
@@ -190,7 +200,7 @@ function App() {
 
     return (
         <div className="App">
-            <ToastContainer />
+            <ToastContainer/>
             <Navbar/>
 
             <Routes>
