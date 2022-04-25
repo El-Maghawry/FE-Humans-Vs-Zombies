@@ -87,6 +87,13 @@ code {
     border: solid 3px darkslategray;
 }
 
+.marker:hover {
+    cursor: pointer;
+    width: 34px;
+    height: 34px;
+    border-radius: 17px;
+}
+
 .mapboxgl-popup {
     width: 100px;
 }

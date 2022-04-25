@@ -67,8 +67,7 @@ function Map(props) {
                 setLng(lngLat.lng);
             });
 
-            marker.setPopup(popup)
-                .togglePopup()
+            marker.setPopup(popup);
 
             });
         };
@@ -83,28 +82,6 @@ function Map(props) {
             {
                 map && <div className="app-map">
                     <div ref={mapElement} className="map"/>
-                    {/*<div className="serch-bar">*/}
-                    {/*    <h2>Enter Longitude</h2>*/}
-                    {/*    <input*/}
-                    {/*        type="text"*/}
-                    {/*        name="lat"*/}
-                    {/*        id="lat"*/}
-                    {/*        placeholder="set latitude"*/}
-                    {/*        onChange={(e) => {*/}
-                    {/*            setLat(Number(e.target.value));*/}
-                    {/*        }}*/}
-                    {/*    />*/}
-                    {/*    <h2>Enter Longitude</h2>*/}
-                    {/*    <input*/}
-                    {/*        type="text"*/}
-                    {/*        name="lnt"*/}
-                    {/*        id="lng"*/}
-                    {/*        placeholder="set longitude"*/}
-                    {/*        onChange={(e) => {*/}
-                    {/*            setLng(Number(e.target.value));*/}
-                    {/*        }}*/}
-                    {/*    />*/}
-                    {/*</div>*/}
                 </div>
             }
         </>
