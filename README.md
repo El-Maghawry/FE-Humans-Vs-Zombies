@@ -74,7 +74,7 @@ Afterwards you need to clone the frontend repo, set your config in the .env file
 
 [Petar Dimitrov]: https://github.com/PetarDimitrov91
 
-[Philipp Loibl]: https://github.com/Loibl33
+[Philipp Loibl]: https://gitlab.com/Loibl33
 
 [Igor Figueiredo]: https://gitlab.com/Igor-GF
 
