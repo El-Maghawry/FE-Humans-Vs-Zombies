@@ -48,7 +48,7 @@ button{
     display: flex;
     flex-direction: row;
     height: 560px;
-    width:50vh;
+    width:64vh;
     margin: 0 auto;
 }
 
@@ -88,11 +88,11 @@ ul {
     list-style-type: none;
 }
 .send-button{
-    width:10%;
+    width:12%;
     border-radius: 5px;
     margin-left: 5px;
     cursor: pointer;
-    padding: 5px;
+    padding: 1px;
 }
 
 

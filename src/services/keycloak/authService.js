@@ -1,4 +1,6 @@
 import {createUserInApi} from "../rest-api/userService";
+import {useContext} from "react";
+import {UserContext} from "../../store/UserContext";
 
 const AUTH_HOST = 'https://app-keycloak-prod.herokuapp.com';
 const HVZ_PROD_CLIENT = "hvz-prod";
@@ -11,6 +13,7 @@ const ADMIN_USERNAME = 'admin';
 const ADMIN_PASSWORD = 'admin';
 const GRANT_TYPE = 'password';
 const CLIENT_ID = 'admin-cli';
+
 
 async function getAdminAccessToken() {
     const adminBody = {
@@ -136,9 +139,7 @@ async function login(username, password) {
         responseUserData.isAdmin = isUserAdmin;
         localStorage.setItem('<USER>', JSON.stringify(responseUserData));
 
-
         return responseUserData;
-
     } catch (e) {
         console.log(e.stackTrace);
     }

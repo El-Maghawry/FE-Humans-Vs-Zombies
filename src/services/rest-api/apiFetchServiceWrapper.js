@@ -1,6 +1,7 @@
 import {refreshUserAccessToken} from "../keycloak/authService";
 
 const API_HOST = 'http://localhost:5001/api';
+const HOST = 'http://localhost:3006';
 
 async function request(url, options) {
     try {
@@ -12,8 +13,8 @@ async function request(url, options) {
             if (response.status === 403 || response.status === 401) {
                 console.log("Not authorized, refreshing the access token");
 
-                let userData = JSON.parse(localStorage.getItem(`<USER>`));
-                await refreshUserAccessToken(userData.refresh_token);
+                let userData = JSON.parse(localStorage.getItem('<USER>'));
+               await refreshUserAccessToken(userData.refresh_token);
 
                 hasAuthErr = true;
                 const access_token = getAccessToken();
@@ -22,6 +23,12 @@ async function request(url, options) {
                 response = await fetch(API_HOST + url, options);
 
                 if (response.ok !== true) {
+                    if (response.status === 403 || response.status === 401) {
+                        debugger
+                        localStorage.removeItem('<USER>')
+                        window.location = HOST + '/login';
+                    }
+
                     hasAuthErr = false;
                 }
             }
