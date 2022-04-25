@@ -29,7 +29,7 @@ const ChatRoom = (props) => {
     }, [userData]);
 
     const connect = () => {
-        let Sock = new SockJS(process.env.WS_URL);
+        let Sock = new SockJS(process.env.REACT_APP_WS_URL);
         stompClient = over(Sock);
         stompClient.connect({}, onConnected, onError);
     };

@@ -7,14 +7,14 @@ import {UserContext} from "../../store/UserContext";
 
 async function getAdminAccessToken() {
     const adminBody = {
-        'username': process.env.ADMIN_USERNAME,
-        'password': process.env.ADMIN_PASSWORD,
-        'grant_type': process.env.GRANT_TYPE,
-        'client_id': process.env.CLIENT_ID
+        'username': process.env.REACT_APP_ADMIN_USERNAME,
+        'password': process.env.REACT_APP_ADMIN_PASSWORD,
+        'grant_type': process.env.REACT_APP_GRANT_TYPE,
+        'client_id': process.env.REACT_APP_CLIENT_ID
     };
 
     try {
-        const response = await fetch(process.env.ADMIN_TOKEN_ENDPOINT, {
+        const response = await fetch(process.env.REACT_APP_ADMIN_TOKEN_ENDPOINT, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -59,7 +59,7 @@ async function registerNewUser(firstname, lastname, email, username, password) {
 
     try {
 
-        const response = await fetch(process.env.USER_REGISTER_ENDPOINT, {
+        const response = await fetch(process.env.REACT_APP_USER_REGISTER_ENDPOINT, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${adminData.access_token}`,
@@ -91,7 +91,7 @@ async function registerNewUser(firstname, lastname, email, username, password) {
 
 async function login(username, password) {
     const userLoginData = {
-        'client_id': process.env.HVZ_PROD_CLIENT,
+        'client_id': process.env.REACT_APP_HVZ_PROD_CLIENT,
         'username': username,
         'password': password,
         'grant_type': 'password'
@@ -101,7 +101,7 @@ async function login(username, password) {
     let responseUserData;
 
     try {
-        const response = await fetch(process.env.LOGIN_ENDPOINT, {
+        const response = await fetch(process.env.REACT_APP_LOGIN_ENDPOINT, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -148,7 +148,7 @@ function parseJwt(token) {
 
 async function refreshUserAccessToken(refresh_token) {
     const userLoginData = {
-        'client_id': process.env.HVZ_PROD_CLIENT,
+        'client_id': process.env.REACT_APP_HVZ_PROD_CLIENT,
         'grant_type': 'refresh_token',
         'refresh_token': refresh_token
     };
@@ -156,7 +156,7 @@ async function refreshUserAccessToken(refresh_token) {
     let responseUserData;
 
     try {
-        const response = await fetch(process.env.LOGIN_ENDPOINT, {
+        const response = await fetch(process.env.REACT_APP_LOGIN_ENDPOINT, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

@@ -1,6 +1,6 @@
 import {refreshUserAccessToken} from "../keycloak/authService";
 
-const API_HOST = process.env.API_URL;
+const API_HOST = process.env.REACT_APP_API_URL;
 // const HOST = 'http://localhost:3006';
 
 async function request(url, options) {
@@ -26,7 +26,7 @@ async function request(url, options) {
                     if (response.status === 403 || response.status === 401) {
                         debugger
                         localStorage.removeItem('<USER>')
-                        window.location = '/login';
+                        window.location = process.env.REACT_APP_LOGIN_FE_URL;
                     }
 
                     hasAuthErr = false;
