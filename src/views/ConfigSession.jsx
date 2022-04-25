@@ -1,6 +1,6 @@
 import React, {useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {createGame} from "../../services/rest-api/gameService";
+import {createGame} from "../services/rest-api/gameService";
 
 const ConfigSession = () => {
     const router = useNavigate();

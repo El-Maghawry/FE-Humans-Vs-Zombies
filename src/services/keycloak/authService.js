@@ -53,7 +53,6 @@ async function registerNewUser(firstname, lastname, email, username, password) {
     };
 
     try {
-
         const response = await fetch(process.env.REACT_APP_USER_REGISTER_ENDPOINT, {
             method: 'POST',
             headers: {
@@ -70,17 +69,14 @@ async function registerNewUser(firstname, lastname, email, username, password) {
             throw new Error('User registration not successful');
         }
 
-        // await Promise.all([
-        //     login(newUserData.username, newUserData.password),
-        //     createUserInApi()
-        // ]);
-
         await login(newUserData.username, newUserData.credentials[0].value);
         await createUserInApi();
 
         console.log(`${username} was registered and logged in`);
+        return true;
     } catch (e) {
         console.log(e.stackTrace);
+        return false;
     }
 }
 

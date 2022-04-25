@@ -24,7 +24,6 @@ async function request(url, options) {
 
                 if (response.ok !== true) {
                     if (response.status === 403 || response.status === 401) {
-                        debugger
                         localStorage.removeItem('<USER>')
                         window.location = process.env.REACT_APP_LOGIN_FE_URL;
                     }

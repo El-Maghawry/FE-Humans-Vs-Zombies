@@ -8,6 +8,7 @@ import {createKillInGame, getAllKillsInGame} from "../../services/rest-api/killS
 import ChatRoom from "../ChatRoom/ChatRoom";
 import Collapsable from "../Collapsable/Collapsable";
 import moment from "moment";
+import {toast} from "react-toastify";
 
 const GameDetails = (props) => {
 
@@ -55,7 +56,6 @@ const GameDetails = (props) => {
 
     const saveGameUpdate = async (event) => {
         event.preventDefault();
-        // PUT: api/game/{id}
 
         const gameChanges = {
             name: title,
@@ -65,6 +65,7 @@ const GameDetails = (props) => {
 
         await updateGame(props.game.id, gameChanges);
         props.fetchGame();
+        toast.success('Game was updated');
         setTitle("");
     };
 
@@ -72,6 +73,7 @@ const GameDetails = (props) => {
         let confirm = window.confirm('Are you sure to delete a game');
         if (confirm) {
             await deleteGame(gameId);
+            toast.success('Game was deleted');
             navigate(`/`);
         }
     };
@@ -82,7 +84,7 @@ const GameDetails = (props) => {
         await updateGame(gameId, {gameState: GAME_STATE_TYPES.in_progress});
 
         props.fetchGame();
-        console.log(gamePlayers);
+        toast.success('Game was started');
     };
 
     async function setZombies(players, probability = 10) {
@@ -127,7 +129,7 @@ const GameDetails = (props) => {
         );
 
         setShowKillForm(false);
-        console.log(killData);
+        toast.success('Kill was created');
     };
 
     const showKills = () => {

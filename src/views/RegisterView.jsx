@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {registerNewUser} from "../../services/keycloak/authService";
+import {registerNewUser} from "../services/keycloak/authService";
 import {toast} from "react-toastify";
 
 const RegisterView = () => {
@@ -56,9 +56,17 @@ const RegisterView = () => {
             return;
         }
 
-        await registerNewUser(firstnameValue, lastnameValue, emailValue, usernameValue, passwordValue);
+        const data = await registerNewUser(firstnameValue, lastnameValue, emailValue, usernameValue, passwordValue);
+
+
+        if (!data) {
+            toast.error('User already exists');
+            return;
+        }
+
         toast.success('Registration Successful');
         router("/");
+
     };
 
     function getRefs() {
