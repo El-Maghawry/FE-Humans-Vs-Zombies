@@ -1,6 +1,6 @@
 # Case Period: Humans vs. Zombies
 
-This application implements a management application for the game humans vs. Zombies
+This application implements a management application for the game Humans vs. Zombies
 
 
 
