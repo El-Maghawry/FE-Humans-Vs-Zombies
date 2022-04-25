@@ -65,7 +65,9 @@ class Profile extends Component {
                         <tr>
                             {/*<th scope="row">1</th>*/}
                             <td>{this.userdata?.playerId}</td>
-                            <td>{this.userdata?.human ? "Human" : "Zombie"}</td>
+                            <td>{this.userdata?.human === null ? "" :
+                                this.userdata?.human === true ? "Human" :
+                                    "Zombie"}</td>
                             <td>{this.userdata?.biteCode}</td>
                             <td>{this.userdata?.kills}</td>
                         </tr>
