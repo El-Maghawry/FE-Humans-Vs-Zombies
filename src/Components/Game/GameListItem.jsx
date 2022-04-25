@@ -9,6 +9,8 @@ const GameListItem = (props) => {
 
     const navigate = useNavigate();
 
+
+
     const joinGame = async (gameId) => {
         let game = await getGameById(gameId);
 
@@ -19,7 +21,18 @@ const GameListItem = (props) => {
         let playerType;
         playerType = getRandomPlayerType();
 
+        let coords = JSON.parse(localStorage.getItem('<COORDS>'));
+
+        if(!coords){
+            coords = {
+                lng:"0",
+                lat:"0",
+            }
+        }
+
         const playerData = await createPlayer(gameId, {
+            lng:`${coords.lng.toString()}`,
+            lat:`${coords.lat.toString()}`,
             human: playerType === 'human',
             zombie: playerType === 'zombie'
         });

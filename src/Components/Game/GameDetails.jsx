@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {deleteGame, getGameById, updateGame} from '../../services/rest-api/gameService';
 import {updatePlayerInGame} from "../../services/rest-api/playerService";
@@ -7,7 +7,6 @@ import Map from "../Map/Map";
 import {createKillInGame, getAllKillsInGame} from "../../services/rest-api/killService";
 import ChatRoom from "../ChatRoom/ChatRoom";
 import Collapsable from "../Collapsable/Collapsable";
-import moment from "moment";
 import {toast} from "react-toastify";
 
 const GameDetails = (props) => {
@@ -19,6 +18,7 @@ const GameDetails = (props) => {
     const [killerId, setKillerId] = useState("");
     const [kills, setKills] = useState([]);
     const [showKillForm, setShowKillForm] = useState(false);
+    const [players, setPlayers] = useState([]);
 
     let gameId = props.game.id;
 
@@ -32,19 +32,41 @@ const GameDetails = (props) => {
     }
 
 
+    useEffect(() => {
+        setPlayers(renderPlayers());
 
-    const renderPlayers = () => {
-        if (props.game.players) {
-            return props.game.players.map(player =>
-                <div key={player.id}>
-                    <p>Player: {player.id}</p>
-                    <p>Username: {player.username}</p>
-                    <p>Player type: {player.isHuman ? 'human' : 'zombie'}</p>
-                    <hr/>
-                </div>
-            );
+        function renderPlayers() {
+            if (props.game.players) {
+                return props.game.players.map(player =>
+                    <div key={player.id}>
+                        <p>Player: {player.id}</p>
+                        <p>Username: {player.username}</p>
+                        <p>Player type: {player.isHuman ? 'human' : 'zombie'}</p>
+                        <hr/>
+                    </div>
+                );
+            }
         }
-    };
+    },[props.game.players]);
+
+    useEffect(() => {
+        setKills(showKills());
+
+        function showKills (){
+            if (props.kills) {
+                return (
+                    props.kills.map(kill =>
+                        <div key={kill.id}>
+                            <p>Killer: {kill.killerUsername}🧟‍♂️ </p>
+                            <p>ToD: {new Date(kill.timeOfDeath).toLocaleString('de-DE')}</p>
+                            <p>victim: {kill.victimUsername}💀</p>
+                            <hr/>
+                        </div>
+                    )
+                );
+            }
+        }
+    }, [props.kills])
 
     const gameUpdateForm = (e) => {
         e.preventDefault();
@@ -129,22 +151,23 @@ const GameDetails = (props) => {
         );
 
         setShowKillForm(false);
+         props.fetchKills();
         toast.success('Kill was created');
     };
 
     const showKills = () => {
-        if (props.kills) {
-            return (
-                props.kills.map(kill =>
-                <div key={""}>
-                    <p>Killer: {kill.killerUsername}🧟‍♂️ </p>
-                    <p>ToD: {new Date(kill.timeOfDeath).toLocaleString('de-DE')}</p>
-                    <p>victim: {kill.victimUsername}💀</p>
-                    <hr/>
-                </div>
-                )
-            )
-        }
+        // if (props.kills) {
+        //     return (
+        //         props.kills.map(kill =>
+        //             <div key={""}>
+        //                 <p>Killer: {kill.killerUsername}🧟‍♂️ </p>
+        //                 <p>ToD: {new Date(kill.timeOfDeath).toLocaleString('de-DE')}</p>
+        //                 <p>victim: {kill.victimUsername}💀</p>
+        //                 <hr/>
+        //             </div>
+        //         )
+        //     );
+        // }
     };
 
     return (
@@ -161,11 +184,15 @@ const GameDetails = (props) => {
                     </div>
 
                     <div className={"col-3"}>
-                        <Collapsable label="View Players" ><div>{renderPlayers()}</div></Collapsable>
+                        <Collapsable label="View Players">
+                             <div>{players}</div>
+                        </Collapsable>
                     </div>
 
                     <div className={"col-5"}>
-                        <Collapsable label="View Kills" ><div>{showKills()}</div></Collapsable>
+                        <Collapsable label="View Kills">
+                            <div>{kills}</div>
+                        </Collapsable>
                     </div>
                 </div>
 
@@ -274,7 +301,7 @@ const GameDetails = (props) => {
                 <div className="map-chat d-flex flex-row p-1 justify-content-around align-items-center">
                     {/*this should go in its own component*/}
                     <div className="map-box p-6 border-1 m-1">
-                        <Map username={userData.username}/>
+                        <Map username={userData.username} players={props.game.players}/>
                     </div>
                     {/*this should go in its own component*/}
                     <div>

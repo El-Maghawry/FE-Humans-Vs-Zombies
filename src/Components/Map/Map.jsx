@@ -14,8 +14,6 @@ function Map(props) {
     function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((e) => {
-                console.log(e.coords.latitude);
-                console.log(e.coords.longitude);
                 setLat(e.coords.latitude);
                 setLng(e.coords.longitude);
             });
@@ -44,6 +42,8 @@ function Map(props) {
         setMap(map);
 
         const addMarker = () => {
+           props.players && props.players.forEach((player) => {
+
             const element = document.createElement('div');
             element.className = 'marker';
 
@@ -52,13 +52,13 @@ function Map(props) {
             };
 
             const popup = new tt.Popup({offset: popupOffset})
-                .setHTML(props.username);
+                .setHTML(player.username);
 
             const marker = new tt.Marker({
                 draggable: true,
                 element: element
             })
-                .setLngLat([lng, lat])
+                .setLngLat([player.lng, player.lat])
                 .addTo(map);
 
             marker.on('dragend', () => {
@@ -70,12 +70,13 @@ function Map(props) {
             marker.setPopup(popup)
                 .togglePopup()
 
+            });
         };
 
         addMarker();
 
         return () => map.remove();
-    }, [lat, lng, props.username]);
+    }, [lat, lng, props.players]);
 
     return (
         <>

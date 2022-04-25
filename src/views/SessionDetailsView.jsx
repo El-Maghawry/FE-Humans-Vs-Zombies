@@ -22,11 +22,11 @@ const SessionDetailsView = () => {
 
     useEffect(() => {
        Promise.all([fetchData(),fetchKills()]);
-    }, []);
+    },[]);
 
     return (
-        <div className="container">
-            <GameDetails game={game} fetchGame={fetchData} kills={kills}/>
+        <div className="container" key={id}>
+            <GameDetails key={id} game={game} fetchGame={fetchData} fetchKills={fetchKills} kills={kills}/>
         </div>
     );
 };
