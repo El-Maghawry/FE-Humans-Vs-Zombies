@@ -1,9 +1,4 @@
 import {createUserInApi} from "../rest-api/userService";
-import {useContext} from "react";
-import {UserContext} from "../../store/UserContext";
-
-
-
 
 async function getAdminAccessToken() {
     const adminBody = {
