@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
-import GameListItem from "../Game/GameListItem";
-import {getAllGames} from "../../services/rest-api/gameService";
+import GameListItem from "../Components/Game/GameListItem";
+import {getAllGames} from "../services/rest-api/gameService";
 
 
 const GameListView = () => {

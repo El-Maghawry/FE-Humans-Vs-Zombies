@@ -19,11 +19,11 @@ import {createUserInApi, getAllUsers, getUserByUsername, updateUser} from "./ser
 import {GAME_STATE_TYPES} from "./services/rest-api/gameStateTypes";
 
 import Navbar from "./Components/Navbar/Navbar";
-import NotFoundView from './Components/views/NotFoundView';
-import LoginView from './Components/views/LoginView';
-import PlayerView from './Components/views/PlayerView';
-import RegisterView from './Components/views/RegisterView';
-import GameListView from './Components/views/GameListView';
+import NotFoundView from './views/NotFoundView';
+import LoginView from './views/LoginView';
+import PlayerView from './views/PlayerView';
+import RegisterView from './views/RegisterView';
+import GameListView from './views/GameListView';
 import {
     createPlayer,
     getAllPlayersInGame,
@@ -36,8 +36,8 @@ import {
     getAllKillsInGame,
     getKillInGame
 } from "./services/rest-api/killService";
-import ConfigSession from "./Components/views/ConfigSession";
-import SessionDetailsView from "./Components/views/SessionDetailsView";
+import ConfigSession from "./views/ConfigSession";
+import SessionDetailsView from "./views/SessionDetailsView";
 import Profile from "./Components/Profile/Profile";
 import Collapsible from "./Components/Collapsable/Collapsable";
 import {RequireAuth} from "./guards/auth";

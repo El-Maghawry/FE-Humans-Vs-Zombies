@@ -1,5 +1,5 @@
 import React from 'react'
-import PlayerForm from '../PlayerForm/PlayerForm'
+import PlayerForm from '../Components/PlayerForm/PlayerForm'
 
 const PlayerView = ({ gameId }) => {
   return (
