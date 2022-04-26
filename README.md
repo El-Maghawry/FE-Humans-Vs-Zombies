@@ -12,7 +12,7 @@ The application data are stored in a postgres database.
 The Frontend is implemented in react and enables users to manage all the game information.
 It stores and fetches all the data in the postgres database using the REST API in the backend.
 You can find the code <a href="https://gitlab.com/gitlab-experis-petar_phil/hvz-game-ginal_case_frontend">here</a>.
-The application is deployed <a href="https://hvz-client-prod.herokuapp.com/">here</a>.
+The application is deployed <a href="https://hvz-game-case.herokuapp.com/">here</a>.
 Here you can see how the user interface looks:
 
 <details>
@@ -51,7 +51,7 @@ To protect the backend from unauthorized access keycloak is used.
 
 ## Usage
 
-To access the application you can simply use the <a href="https://hvz-client-prod.herokuapp.com/">frontend link</a>. 
+To access the application you can simply use the <a href="https://hvz-game-case.herokuapp.com/">frontend link</a>. 
 If you want to run it locally you can clone the backend repo and run ```docker compose up -d``` in the project root directories.
 Afterwards you need to clone the frontend repo, set your config in the .env file and run ```npm run start``` in the frontend root directory.
 
