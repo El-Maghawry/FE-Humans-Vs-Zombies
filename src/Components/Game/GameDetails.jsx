@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {deleteGame, getGameById, updateGame} from '../../services/rest-api/gameService';
 import {updatePlayerInGame} from "../../services/rest-api/playerService";
 import {GAME_STATE_TYPES} from "../../services/rest-api/gameStateTypes";
@@ -155,20 +155,7 @@ const GameDetails = (props) => {
         toast.success('Kill was created');
     };
 
-    const showKills = () => {
-        // if (props.kills) {
-        //     return (
-        //         props.kills.map(kill =>
-        //             <div key={""}>
-        //                 <p>Killer: {kill.killerUsername}🧟‍♂️ </p>
-        //                 <p>ToD: {new Date(kill.timeOfDeath).toLocaleString('de-DE')}</p>
-        //                 <p>victim: {kill.victimUsername}💀</p>
-        //                 <hr/>
-        //             </div>
-        //         )
-        //     );
-        // }
-    };
+
 
     return (
         <>
@@ -181,6 +168,7 @@ const GameDetails = (props) => {
                         <p>{props.game.state}</p>
                         <h6>Description:</h6>
                         <p>{props.game.description}</p>
+                        <a className="btn btn-secondary" href="https://qubeshub.org/community/groups/hvz/File:/uploads/UnityCollegeHvZRulesandRegulations.pdf">Game Rules</a>
                     </div>
 
                     <div className={"col-3"}>
